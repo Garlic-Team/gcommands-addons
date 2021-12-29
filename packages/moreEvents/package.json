@@ -2,7 +2,7 @@
   "name": "gcommands-plugin-moreevents",
   "version": "1.0.0",
   "description": "",
-  "main": "babel.config.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:babel": "npx babel --extensions .ts ./src -d ./dist --minified --copy-files"

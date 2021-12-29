@@ -16,9 +16,5 @@ new Listener('interactionCreate', {
         else if (interaction.isAutocomplete()) {
             client.emit('autocomplete', interaction);
         }
-
-        else if (interaction.isSelectMenu()) {
-            client.emit('selectMenu', interaction);
-        }
     }
 })
