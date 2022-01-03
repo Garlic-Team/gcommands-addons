@@ -46,7 +46,7 @@ declare module 'discord.js' {
         userAvatarUpdate: [User, string, string];
         userUsernameUpdate: [User, string, string];
         userDiscriminatorUpdate: [User, string, string];
-        userFlagsUpdate: [User, string, string];
+        userFlagsUpdate: [User, Readonly<UserFlags>, Readonly<UserFlags>];
         userBannerUpdate: [User, string, string];
     
         rolePositionUpdate: [Role, Number, Number];
