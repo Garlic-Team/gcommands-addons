@@ -1,0 +1,26 @@
+name: "Release"
+
+on: [ workflow_dispatch ]
+
+jobs:
+  release:
+    name: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node v16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+
+      - name: Release more-events
+        run: | 
+          cd packages/moreEvents
+          npm ci
+          npm run build
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
