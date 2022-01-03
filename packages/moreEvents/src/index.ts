@@ -2,6 +2,9 @@ import { Plugin, registerDirectory } from 'gcommands';
 import * as path from 'path';
 
 declare module 'discord.js' {
+    type VoiceChannelMuteType = 'self-muted' | 'server-muted';
+    type VoiceChannelDeafType = 'self-deafened' | 'server-deafened';
+
     interface ClientEvents {
         selectMenu: [SelectMenuInteraction];
         clickButton: [ButtonInteraction];
@@ -25,29 +28,29 @@ declare module 'discord.js' {
         threadRateLimitPerUserUpdate: [ThreadChannel, Number, Number];
         threadAutoArchiveDurationUpdate: [ThreadChannel, Number, Number];
     
-        voiceChannelJoin: [Channel, VoiceState];
-        voiceChannelLeave: [Channel, VoiceState];
-        voiceChannelSwitch: [Channel, Channel, VoiceState];
-        voiceChannelMute: [Channel, string];
-        voiceChannelUnmute: [Channel, string];
-        voiceChannelDeaf: [Channel, string];
-        voiceChannelUndeaf: [Channel, string];
-        voiceStreamingStart: [Channel, Channel];
-        voiceStreamingStop: [Channel, Channel];
+        voiceChannelJoin: [GuildMember, VoiceChannel];
+        voiceChannelLeave: [GuildMember, VoiceChannel];
+        voiceChannelSwitch: [GuildMember, VoiceChannel, VoiceChannel];
+        voiceChannelMute: [GuildMember, VoiceChannelMuteType];
+        voiceChannelUnmute: [GuildMember, VoiceChannelMuteType];
+        voiceChannelDeaf: [GuildMember, VoiceChannelDeafType];
+        voiceChannelUndeaf: [GuildMember, VoiceChannelDeafType];
+        voiceStreamingStart: [GuildMember, VoiceChannel];
+        voiceStreamingStop: [GuildMember, VoiceChannel];
     
         guildMemberNicknameUpdate: [GuildMember, string, string];
         guildMemberAcceptShipScreening: [GuildMember];
         guildMemberBoost: [GuildMember, Number, Number];
         guildMemberUnboost: [GuildMember, Number, Number];
     
-        userAvatarUpdate: [GuildMember, string, string];
-        userUsernameUpdate: [GuildMember, string, string];
-        userDiscriminatorUpdate: [GuildMember, string, string];
-        userFlagsUpdate: [GuildMember, string, string];
-        userBannerUpdate: [GuildMember, string, string];
+        userAvatarUpdate: [User, string, string];
+        userUsernameUpdate: [User, string, string];
+        userDiscriminatorUpdate: [User, string, string];
+        userFlagsUpdate: [User, string, string];
+        userBannerUpdate: [User, string, string];
     
-        rolePositionUpdate: [GuildMember, Number, Number];
-        rolePermissionsUpdate: [GuildMember, Number, Number];
+        rolePositionUpdate: [Role, Number, Number];
+        rolePermissionsUpdate: [Role, Number, Number];
     }
 }
 
