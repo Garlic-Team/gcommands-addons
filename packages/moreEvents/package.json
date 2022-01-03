@@ -1,7 +1,7 @@
 {
   "name": "gcommands-plugin-moreevents",
   "version": "1.0.0",
-  "description": "",
+  "description": "Extend default discord.js events",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
