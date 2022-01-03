@@ -37,5 +37,13 @@ new Listener('userUpdate', {
                 newUser.flags,
             );
         }
+
+        if (oldUser.banner !== newUser.banner) {
+            client.emit('userBannerUpdate',
+                newUser,
+                oldUser.banner,
+                newUser.banner
+            )
+        }
     }
 })

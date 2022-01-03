@@ -2,7 +2,7 @@ import { Plugin, registerDirectory } from 'gcommands';
 import * as path from 'path';
 
 declare module 'discord.js' {
-    export interface ClientEvnets {
+    interface ClientEvents {
         selectMenu: [SelectMenuInteraction];
         clickButton: [ButtonInteraction];
     
@@ -44,6 +44,7 @@ declare module 'discord.js' {
         userUsernameUpdate: [GuildMember, string, string];
         userDiscriminatorUpdate: [GuildMember, string, string];
         userFlagsUpdate: [GuildMember, string, string];
+        userBannerUpdate: [GuildMember, string, string];
     
         rolePositionUpdate: [GuildMember, Number, Number];
         rolePermissionsUpdate: [GuildMember, Number, Number];

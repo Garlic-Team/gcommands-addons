@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:babel": "npx babel --extensions .ts ./src -d ./dist --minified --copy-files"
+    "build:babel": "npx babel --extensions .ts ./src -d ./dist --minified --copy-files",
+    "build:types": "tsc --emitDeclarationOnly"
   },
   "keywords": [],
   "author": "",
