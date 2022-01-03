@@ -1,6 +1,7 @@
 import { Listener } from "gcommands";
 
-new Listener('threadUpdate', {
+new Listener({
+    event: 'threadUpdate',
     name: 'threadUpdate-moreevents',
     run: (oldThread, newThread) => {
         const client = oldThread.client;

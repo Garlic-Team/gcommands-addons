@@ -1,6 +1,7 @@
 import { Listener } from "gcommands";
 
-new Listener('voiceStateUpdate', {
+new Listener({
+    event: 'voiceStateUpdate',
     name: 'voiceStateUpdate-moreevents',
     run: (oldState, newState) => {
         const client = oldState.client;

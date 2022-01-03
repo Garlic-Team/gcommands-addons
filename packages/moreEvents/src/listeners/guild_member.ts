@@ -1,6 +1,7 @@
 import { Listener } from "gcommands";
 
-new Listener('guildMemberUpdate', {
+new Listener({
+    event: 'guildMemberUpdate',
     name: 'guildMemberUpdate-moreEvents',
     run: (oldMember, newMember) => {
         const client = oldMember.client;

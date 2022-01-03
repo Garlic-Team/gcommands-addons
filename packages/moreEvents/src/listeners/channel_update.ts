@@ -1,7 +1,8 @@
 import { DMChannel, GuildChannel, TextChannel, VoiceChannel } from "discord.js";
 import { Listener } from "gcommands";
 
-new Listener('channelUpdate', {
+new Listener({
+    event: 'channelUpdate',
     name: 'channelUpdate-moreEvents',
     run: (oldChannel, newChannel) => {
         const client = oldChannel.client;

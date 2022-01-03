@@ -1,6 +1,7 @@
 import { Listener } from "gcommands";
 
-new Listener('interactionCreate', {
+new Listener({
+    event: 'interactionCreate',
     name: 'interactionCreate-moreevents',
     run: (interaction) => {
         const client = interaction.client;

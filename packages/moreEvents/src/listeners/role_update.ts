@@ -1,6 +1,7 @@
 import { Listener } from "gcommands";
 
-new Listener('roleUpdate', {
+new Listener({
+    event: 'roleUpdate',
     name: 'roleUpdate-moreevents',
     run: (oldRole, newRole) => {
         const client = oldRole.client;
