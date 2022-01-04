@@ -26,7 +26,7 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "discord.js": "^13.3.1",
-    "gcommands": "^0.1.0-nextdev.1641238536"
+    "discord.js": "^13.5.0",
+    "gcommands": "^0.1.0-nextdev.1641304417"
   }
 }
