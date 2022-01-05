@@ -6,7 +6,7 @@ on:
       name:
         description: 'Package name to publish'
         required: true
-        default: 'moreevents'
+        default: 'plugin-moreevents'
 
 jobs:
   release:
