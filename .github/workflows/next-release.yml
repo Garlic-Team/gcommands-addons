@@ -1,6 +1,12 @@
-name: "Dev Release"
+name: "Next Release"
 
-on: [ workflow_dispatch ]
+on: 
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Package name to publish'
+        required: true
+        default: 'moreevents'
 
 jobs:
   release:
@@ -16,13 +22,13 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
 
-      - name: Release more-events
+      - name: Release ${{ github.event.inputs.name }}
         run: | 
-          cd packages/moreEvents
+          cd packages/${{ github.event.inputs.name }}
           npm ci
           npm run build
-          npm deprecate gcommands-plugin-moreevents@"~$(jq --raw-output '.version' package.json)" "no longer supported" || true
+          npm deprecate gcommands-plugin-${{ github.event.inputs.name }}@"~$(jq --raw-output '.version' package.json)" "no longer supported" || true
           npm version --git-tag-version=false $(jq --raw-output '.version' package.json).$(date +%s)
-          npm publish  --tag dev || true
+          npm publish  --tag next || true
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
