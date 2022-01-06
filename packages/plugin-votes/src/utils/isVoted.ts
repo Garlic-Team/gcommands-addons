@@ -1,21 +1,21 @@
-import { Client, Snowflake } from "discord.js";
-import LruCache from 'lru-cache';
+import { Snowflake } from "discord.js";
+import { GClient } from "gcommands";
 import hyttpo from 'hyttpo';
 
 export class isVoted {
-    client: Client;
-    cache: LruCache<Snowflake, boolean>;
+    client: GClient;
     dblToken: string;
+    cache;
 
-    constructor(client: Client, dblToken: string) {
+    constructor(client: GClient, dblToken: string, database: unknown) {
         this.client = client;
         this.dblToken = dblToken;
 
-        this.cache = new LruCache({ max: 200, maxAge: 3600000 });
+        this.cache = client.getDatabase(database);
     }
 
     async voted(userId: Snowflake) {
-        const cache = this.cache.get(userId);
+        const cache = await this.getFromCache(userId);
         if (cache && cache === true) return true;
         else {
             const res = await hyttpo.request({
@@ -35,6 +35,26 @@ export class isVoted {
 
                 return false;
             }
+        }
+    }
+
+    async getFromCache(userId): Promise<boolean> {
+        if (this.cache.type === 'mongodb') {
+            return (await this.cache.get('plugin-votes', { userId })).voted;
+        } else if (this.cache.type === 'prismaio') {
+            return (await this.cache.get('plugin-votes', { userId })).voted;
+        } else {
+            return (await this.cache.get(`plugin-votes-${userId}}`));
+        }
+    }
+
+    async setToDatabase(userId, voted) {
+        if (this.cache.type === 'mongodb') {
+            return await this.cache.set('plugin-votes', { userId, voted });
+        } else if (this.cache.type === 'prismaio') {
+            return await this.cache.set('plugin-votes', { userId, voted });
+        } else {
+            return await this.cache.set(`plugin-votes-${userId}}`, voted);
         }
     }
 }

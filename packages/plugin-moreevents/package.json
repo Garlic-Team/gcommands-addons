@@ -27,6 +27,6 @@
   },
   "dependencies": {
     "discord.js": "^13.5.0",
-    "gcommands": "^9.0.0-next.1641376207"
+    "gcommands": "^9.0.0-next.1641485796"
   }
 }
