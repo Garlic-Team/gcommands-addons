@@ -10,14 +10,14 @@
 Install with [npm](https://www.npmjs.com/) / [yarn](https://yarnpkg.com) / [pnpm](https://pnpm.js.org/):
 
 ```sh
-npm install gcommands-plugin-moreevents
-yarn add gcommands-plugin-moreevents
-pnpm add gcommands-plugin-moreevents
+npm install @gcommands/plugin-moreevents
+yarn add @gcommands/plugin-moreevents
+pnpm add @gcommands/plugin-moreevents
 ```
 
 ```js
 const { Plugins } = require('gcommands');
-require('gcommands-plugin-moreevents');
+require('@gcommands/plugin-moreevents'); // typings inject
 
 Plugins.search(__dirname)
 ```

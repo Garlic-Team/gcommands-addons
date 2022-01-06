@@ -54,6 +54,6 @@ declare module 'discord.js' {
     }
 }
 
-new Plugin('moreEvents', () => {
+new Plugin('@gcommands/plugin-moreevents', () => {
     registerDirectory(path.join(__dirname, 'listeners'));
 })
