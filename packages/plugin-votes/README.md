@@ -31,7 +31,7 @@ pnpm add @gcommands/plugin-votes
 ```js
 // index.js / LruCache Provider (recommended)
 const { Plugins, GClient } = require('gcommands');
-const { LruCacheProvider } = require('gcommands/dist/providers/LruCache');
+const { LruCacheProvider } = require('gcommands/dist/providers/LruCacheProvider');
 
 const client = new GClient({
     database: new LruCacheProvider({ max: 200, maxAge: 3600000 });
@@ -47,7 +47,7 @@ require('@gcommands/plugin-votes')({
 Plugins.search(__dirname)
 
 // command.js
-const { Comamnd } = require('gcommands');
+const { Command } = require('gcommands');
 const { VoteInhibitor } = require('@gcommands/plugin-votes');
 
 new Command({
