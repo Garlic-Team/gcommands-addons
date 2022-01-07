@@ -5,7 +5,7 @@
     
   <br />
   <p>
-    <a href="https://www.npmjs.com/package/@gcommands/plugin-cooldowns"><img src="https://nodei.co/npm/@gcommands/plugin-votes.png?downloads=true&stars=true" alt="NPM Banner"></a>
+    <a href="https://www.npmjs.com/package/@gcommands/plugin-cooldowns"><img src="https://nodei.co/npm/@gcommands/plugin-cooldowns.png?downloads=true&stars=true" alt="NPM Banner"></a>
     <br />
     <img src="https://discord.com/api/guilds/833628077556367411/embed.png?style=banner2"></img>
   </p>
