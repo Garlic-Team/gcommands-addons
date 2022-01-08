@@ -50,6 +50,7 @@ const { CooldownInhibitor } = require('@gcommands/plugin-cooldowns');
 new Command({
     inhibitors: [
         new CooldownInhibitor({
+            cooldown: '1d',
             message: 'You need wait {duration} before use.'
         })
     ]

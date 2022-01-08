@@ -2,13 +2,13 @@ import { CommandContext, ComponentContext, Inhibitor } from 'gcommands';
 import { Cooldowns } from '../utils/CooldownManager';
 import ms from 'ms';
 
-export interface ChannelOnlyOptions extends Inhibitor.InhibitorOptions {
+export interface CooldownInhibitorOptions extends Inhibitor.InhibitorOptions {
 	cooldown: string;
 }
 
 export class CooldownInhibitor extends Inhibitor.Inhibitor {
 	cooldown: number;
-	constructor(options) {
+	constructor(options: CooldownInhibitorOptions) {
 		super(options);
     
 		this.cooldown = ms(options.cooldown);
