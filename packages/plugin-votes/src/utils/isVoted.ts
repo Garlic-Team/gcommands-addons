@@ -50,11 +50,11 @@ export class isVoted {
 
 	async setToDatabase(userId, voted) {
 		if (this.cache.type === 'mongodb') {
-			return await this.cache.set('plugin-votes', { userId, voted });
+			return await this.cache.insert('plugin-votes', { userId, voted });
 		} else if (this.cache.type === 'prismaio') {
-			return await this.cache.set('plugin-votes', { userId, voted });
+			return await this.cache.insert('plugin-votes', { userId, voted });
 		} else {
-			return await this.cache.set(`plugin-votes-${userId}}`, voted);
+			return await this.cache.insert(`plugin-votes-${userId}}`, voted);
 		}
 	}
 }

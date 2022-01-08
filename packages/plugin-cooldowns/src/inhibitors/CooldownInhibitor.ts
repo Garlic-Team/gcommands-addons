@@ -15,10 +15,10 @@ export class CooldownInhibitor extends Inhibitor.Inhibitor {
 	}
 
 	async run(ctx: CommandContext | ComponentContext): Promise<any> {
-		const hasCooldown = Cooldowns.hasCooldown(ctx.client, ctx.userId);
+		const hasCooldown = await Cooldowns.hasCooldown(ctx.client, ctx.userId);
 		if (hasCooldown) {
 			return ctx.reply({
-				content: this.resolveMessage(ctx) || `[Before you use this command, you have to vote for me on top.gg](https://top.gg/bot/${ctx.client.user.id})`,
+				content: this.resolveMessage(ctx) || `You need wait ${hasCooldown}`,
 				ephemeral: true
 		    });
 		} else {

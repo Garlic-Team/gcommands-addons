@@ -1,20 +1,16 @@
-import { LimitedCollection, LimitedCollectionOptions, Snowflake } from 'discord.js';
+import { Snowflake } from 'discord.js';
 import { GClient } from 'gcommands';
+import ms from 'ms';
 
 export class CooldownManager {
-	cache: LimitedCollectionOptions<Snowflake, number>;
-
-	constructor() {
-		this.cache = new LimitedCollection({ maxSize: 100 });
-	}
 
 	init(): void {
 		return;
 	}
 
-	async hasCooldown(client: GClient, userId: Snowflake): Promise<boolean> {
+	async hasCooldown(client: GClient, userId: Snowflake): Promise<boolean | string> {
 		const has = await this._getCooldown(client, userId);
-		if (has && Date.now() > has) return true;
+		if (has && has > Date.now()) return `${ms(has - Date.now())}`;
 		else return false;
 	}
 
@@ -38,11 +34,11 @@ export class CooldownManager {
 		const db = (client.getDatabase() as any);
 
 		if (db.type === 'mongodb') {
-			return await db.set('plugin-cooldowns', { userId, cooldown: cooldown + Date.now() });
+			return await db.insert('plugin-cooldowns', { userId, cooldown: cooldown + Date.now() });
 		} else if (db.type === 'prismaio') {
-			return await db.get('plugin-cooldowns', { userId, cooldown: cooldown + Date.now() });
+			return await db.insert('plugin-cooldowns', { userId, cooldown: cooldown + Date.now() });
 		} else {
-			return await db.set(`plugin-cooldowns-${userId}}`, cooldown + Date.now());
+			return await db.insert(`plugin-cooldowns-${userId}}`, cooldown + Date.now());
 		}
 	}
 }
