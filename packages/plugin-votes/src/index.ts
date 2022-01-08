@@ -16,21 +16,19 @@ type ListTypes = 'TOP.GG'
 interface PluginVotesOptions {
     type: ListTypes;
     dblToken: string;
-    webhookAuth: string;
-    database;
+    webhookToken: string;
     port?: number;
 }
 
 export default (options: PluginVotesOptions) => {
 	if (!options.type) return Logger.error('Please define type', pluginName);
-	if (!options.database) return Logger.error('Please define database', pluginName);
 	if (!options.dblToken) return Logger.error('Please define dblToken', pluginName);
-	if (!options.webhookAuth) return Logger.error('Please define webhookAuth', pluginName);
+	if (!options.webhookToken) return Logger.error('Please define webhookToken', pluginName);
 
 	new Plugin(pluginName, (client) => {
-		client.isVoted = new isVoted(client, options.dblToken, options.database);
+		client.isVoted = new isVoted(client, options.dblToken, client.getDatabase());
     
-		expressServer(client.isVoted, options.webhookAuth, options.port);
+		expressServer(client.isVoted, options.webhookToken, options.port);
 	});
 };
 

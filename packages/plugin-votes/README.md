@@ -37,11 +37,10 @@ const client = new GClient({
     database: new LruCacheProvider({ max: 200, maxAge: 3600000 });
 })
 
-require('@gcommands/plugin-votes')({
+require('@gcommands/plugin-votes').default({
     type: 'TOP.GG',
     dblToken: 'your top.gg authorization token',
-    webhookToken: 'random token for webhook',
-    database: client.getDatabase(LruCacheProvider.prototype)
+    webhookToken: 'random token for webhook'
 })
 
 Plugins.search(__dirname)
