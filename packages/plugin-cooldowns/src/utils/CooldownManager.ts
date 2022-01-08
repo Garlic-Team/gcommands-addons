@@ -3,7 +3,6 @@ import { GClient } from 'gcommands';
 import ms from 'ms';
 
 export class CooldownManager {
-
 	init(): void {
 		return;
 	}
@@ -22,9 +21,9 @@ export class CooldownManager {
 		const db = (client.getDatabase() as any);
 
 		if (db.type === 'mongodb') {
-			return (await db.get('plugin-cooldowns', { userId })).cooldown;
+			return (await db.get('plugin-cooldowns', { userId }))?.cooldown;
 		} else if (db.type === 'prismaio') {
-			return (await db.get('plugin-cooldowns', { userId })).cooldown;
+			return (await db.get('plugin-cooldowns', { userId }))?.cooldown;
 		} else {
 			return (await db.get(`plugin-cooldowns-${userId}}`));
 		}
@@ -32,13 +31,14 @@ export class CooldownManager {
 
 	private async _setCooldown(client: GClient, userId: Snowflake, cooldown: number) {
 		const db = (client.getDatabase() as any);
+		const cldwn = cooldown + Date.now();
 
 		if (db.type === 'mongodb') {
-			return await db.insert('plugin-cooldowns', { userId, cooldown: cooldown + Date.now() });
+			return await db.insert('plugin-cooldowns', { userId, cooldown: cldwn, expires: new Date(cldwn) });
 		} else if (db.type === 'prismaio') {
-			return await db.insert('plugin-cooldowns', { userId, cooldown: cooldown + Date.now() });
+			return await db.insert('plugin-cooldowns', { userId, cooldown: cldwn });
 		} else {
-			return await db.insert(`plugin-cooldowns-${userId}}`, cooldown + Date.now());
+			return await db.insert(`plugin-cooldowns-${userId}}`, cldwn);
 		}
 	}
 }
