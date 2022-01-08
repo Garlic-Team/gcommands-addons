@@ -44,7 +44,7 @@ export class isVoted {
 		} else if (this.cache.type === 'prismaio') {
 			return (await this.cache.get('plugin-votes', { userId })).voted;
 		} else {
-			return (await this.cache.get(`plugin-votes-${userId}}`));
+			return (await this.cache.get(`plugin-votes-${userId}`));
 		}
 	}
 
@@ -54,7 +54,7 @@ export class isVoted {
 		} else if (this.cache.type === 'prismaio') {
 			return await this.cache.insert('plugin-votes', { userId, voted });
 		} else {
-			return await this.cache.insert(`plugin-votes-${userId}}`, voted);
+			return await this.cache.insert(`plugin-votes-${userId}`, voted);
 		}
 	}
 }
