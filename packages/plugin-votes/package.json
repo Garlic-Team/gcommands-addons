@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "bash scripts/build.bash",
     "build:babel": "npx babel --extensions .ts ./src -d ./dist --minified --copy-files",
-    "build:types": "tsc --emitDeclarationOnly"
+    "build:types": "tsc --emitDeclarationOnly",
+    "lint": "npx eslint . --fix -c ../../.eslintrc.json"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +19,8 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
     "@types/node": "^17.0.4",
-    "@typescript-eslint/eslint-plugin": "^5.8.0",
-    "@typescript-eslint/parser": "^5.8.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^1.0.4",
-    "eslint": "^8.5.0",
     "typescript": "^4.5.4"
   },
   "dependencies": {

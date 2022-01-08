@@ -1,21 +1,21 @@
-import { Listener } from "gcommands";
+import { Listener } from 'gcommands';
 
 new Listener({
-    event: 'interactionCreate',
-    name: 'interactionCreate-moreevents',
-    run: (interaction) => {
-        const client = interaction.client;
+	event: 'interactionCreate',
+	name: 'interactionCreate-moreevents',
+	run: (interaction) => {
+		const client = interaction.client;
 
-        if (interaction.isButton()) {
-            client.emit('clickButton', interaction);
-        }
+		if (interaction.isButton()) {
+			client.emit('clickButton', interaction);
+		}
 
-        else if (interaction.isSelectMenu()) {
-            client.emit('selectMenu', interaction);
-        }
+		else if (interaction.isSelectMenu()) {
+			client.emit('selectMenu', interaction);
+		}
 
-        else if (interaction.isAutocomplete()) {
-            client.emit('autocomplete', interaction);
-        }
-    }
-})
+		else if (interaction.isAutocomplete()) {
+			client.emit('autocomplete', interaction);
+		}
+	}
+});

@@ -9,8 +9,8 @@ declare module 'discord.js' {
         selectMenu: [SelectMenuInteraction];
         clickButton: [ButtonInteraction];
     
-        guildBoostLevelUp: [Guild, Number, Number];
-        guildBoostLevelDown: [Guild, Number, Number];
+        guildBoostLevelUp: [Guild, number, number];
+        guildBoostLevelDown: [Guild, number, number];
         guildRegionUpdate: [Guild, string, string];
         guildBannerUpdate: [Guild, string, string];
         guildAfkChannelUpdate: [Guild, Channel, Channel];
@@ -18,15 +18,15 @@ declare module 'discord.js' {
         guildFeaturesUpdate: [Guild, object, object];
         guildAcronymUpdate: [Guild, string, string];
         guildOwnerUpdate: [Guild, GuildMember, GuildMember];
-        guildMaximumMembersUpdate: [Guild, Number, Number];
-        guildPartnerUpdate: [Guild, Boolean, Boolean];
-        guildVerifyUpdate: [Guild, Boolean, Boolean];
+        guildMaximumMembersUpdate: [Guild, number, number];
+        guildPartnerUpdate: [Guild, boolean, boolean];
+        guildVerifyUpdate: [Guild, boolean, boolean];
     
         threadStateUpdate: [ThreadChannel, ThreadChannel];
         threadNameUpdate: [ThreadChannel, string, string];
         threadLockStateUpdate: [ThreadChannel, ThreadChannel];
-        threadRateLimitPerUserUpdate: [ThreadChannel, Number, Number];
-        threadAutoArchiveDurationUpdate: [ThreadChannel, Number, Number];
+        threadRateLimitPerUserUpdate: [ThreadChannel, number, number];
+        threadAutoArchiveDurationUpdate: [ThreadChannel, number, number];
     
         voiceChannelJoin: [GuildMember, VoiceChannel];
         voiceChannelLeave: [GuildMember, VoiceChannel];
@@ -40,8 +40,8 @@ declare module 'discord.js' {
     
         guildMemberNicknameUpdate: [GuildMember, string, string];
         guildMemberAcceptShipScreening: [GuildMember];
-        guildMemberBoost: [GuildMember, Number, Number];
-        guildMemberUnboost: [GuildMember, Number, Number];
+        guildMemberBoost: [GuildMember, number, number];
+        guildMemberUnboost: [GuildMember, number, number];
     
         userAvatarUpdate: [User, string, string];
         userUsernameUpdate: [User, string, string];
@@ -49,11 +49,11 @@ declare module 'discord.js' {
         userFlagsUpdate: [User, Readonly<UserFlags>, Readonly<UserFlags>];
         userBannerUpdate: [User, string, string];
     
-        rolePositionUpdate: [Role, Number, Number];
-        rolePermissionsUpdate: [Role, Number, Number];
+        rolePositionUpdate: [Role, number, number];
+        rolePermissionsUpdate: [Role, number, number];
     }
 }
 
 new Plugin('@gcommands/plugin-moreevents', () => {
-    registerDirectory(path.join(__dirname, 'listeners'));
-})
+	registerDirectory(path.join(__dirname, 'listeners'));
+});
