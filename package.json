@@ -1,4 +1,17 @@
 {
+  "name": "@gcommands/addons",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garlic-Team/gcommands-addons.git"
+  },
+  "keywords": [],
+  "author": "Garlic-Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Garlic-Team/gcommands-addons/issues"
+  },
+  "homepage": "https://github.com/Garlic-Team/gcommands-addons#readme",
   "devDependencies": {
     "@babel/cli": "^7.16.7",
     "@babel/core": "^7.16.7",

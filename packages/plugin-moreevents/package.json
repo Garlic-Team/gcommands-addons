@@ -10,8 +10,21 @@
     "build:types": "tsc --emitDeclarationOnly",
     "lint": "npx eslint . --fix -c ../../.eslintrc.json"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "gcommands",
+    "plugin",
+    "moreevents",
+    "discord.js"
+  ],
+  "author": "Garlic-Team",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garlic-Team/gcommands-addons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Garlic-Team/gcommands-addons/issues"
+  },
+  "homepage": "https://github.com/Garlic-Team/gcommands-addons#readme",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^17.0.4",
