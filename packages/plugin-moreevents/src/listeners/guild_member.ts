@@ -30,6 +30,30 @@ new Listener({
 			);
 		}
 
+		if (!oldMember.isCommunicationDisabled && newMember.isCommunicationDisabled) {
+			client.emit('guildMemberTimeoutAdded',
+				newMember,
+				oldMember.communicationDisabledUntil,
+				newMember.communicationDisabledUntil
+			);
+		}
+
+		if (oldMember.isCommunicationDisabled && !newMember.isCommunicationDisabled) {
+			client.emit('guildMemberTimeoutRemoved',
+				newMember,
+				oldMember.communicationDisabledUntil,
+				newMember.communicationDisabledUntil
+			);
+		}
+
+		if (oldMember.isCommunicationDisabled && oldMember.communicationDisabledUntilTimestamp !== newMember.communicationDisabledUntilTimestamp) {
+			client.emit('guildMemberTimeoutChanged',
+				newMember,
+				oldMember.communicationDisabledUntil,
+				newMember.communicationDisabledUntil
+			);
+		}
+
 		if (newMember.pending === false) {
 			client.emit('guildMemberAcceptShipScreening',
 				newMember,

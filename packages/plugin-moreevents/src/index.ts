@@ -42,6 +42,9 @@ declare module 'discord.js' {
         guildMemberAcceptShipScreening: [GuildMember];
         guildMemberBoost: [GuildMember, number, number];
         guildMemberUnboost: [GuildMember, number, number];
+        guildMemberTimeoutAdded: [GuildMember, Date, Date];
+        guildMemberTimeoutChanged: [GuildMember, Date, Date];
+        guildMemberTimeoutRemoved: [GuildMember, Date, Date];
     
         userAvatarUpdate: [User, string, string];
         userUsernameUpdate: [User, string, string];
