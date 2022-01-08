@@ -1,5 +1,6 @@
 import { Plugin } from 'gcommands';
+import { Cooldowns } from './utils/CooldownManager';
 
-new Plugin('@gcommands/plugin-cooldowns', (client) => {
-	console.log('no empty function', client.user.tag);
+new Plugin('@gcommands/plugin-cooldowns', () => {
+	Cooldowns.init();
 });

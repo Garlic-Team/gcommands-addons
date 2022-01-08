@@ -5,7 +5,7 @@ export class VoteInhibitor extends Inhibitor.Inhibitor {
 		const voted = await ctx.client.isVoted.voted(ctx.userId);
         
 		if (voted) return true;
-		else ctx.reply({
+		else return ctx.reply({
 			content: this.resolveMessage(ctx) || `[Before you use this command, you have to vote for me on top.gg](https://top.gg/bot/${ctx.client.user.id})`,
 			ephemeral: true
 		});
