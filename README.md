@@ -5,7 +5,7 @@
     
   <br />
   <p>
-    <img src="https://discord.com/api/guilds/833628077556367411/embed.png?style=banner2" />
+    <a href="https://discord.gg/AjKJSBbGm2"><img src="https://discord.com/api/guilds/833628077556367411/embed.png?style=banner2" /></a>
     <br />
     <img src="https://img.shields.io/npm/v/@gcommands/plugin-votes?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-votes" />
     <img src="https://img.shields.io/npm/v/@gcommands/plugin-moreevents?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-moreevents" />
