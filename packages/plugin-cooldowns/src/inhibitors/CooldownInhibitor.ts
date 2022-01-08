@@ -18,7 +18,7 @@ export class CooldownInhibitor extends Inhibitor.Inhibitor {
 		const hasCooldown = await Cooldowns.hasCooldown(ctx.client, ctx.userId);
 		if (hasCooldown) {
 			return ctx.reply({
-				content: this.resolveMessage(ctx) || `You need wait ${hasCooldown}`,
+				content: (this.resolveMessage(ctx) as string)?.replace('{duration}', `${hasCooldown}`) || `You need wait ${hasCooldown}`,
 				ephemeral: true
 		    });
 		} else {
