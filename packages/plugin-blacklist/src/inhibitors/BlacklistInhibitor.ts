@@ -6,11 +6,11 @@ export class BlacklistInhibitor extends Inhibitor.Inhibitor {
 		const hasBlacklist = await BlacklistManager.hasBlacklist(ctx.client, ctx.userId);
 
 		if (hasBlacklist) {
-            return ctx.reply({
-                content: this.resolveMessage(ctx) || 'You\'re blacklisted.',
-                ephemeral: true
-            })
-        }
-        else return true;
+			return ctx.reply({
+				content: this.resolveMessage(ctx) || 'You\'re blacklisted.',
+				ephemeral: true
+			});
+		}
+		else return true;
 	}
 }

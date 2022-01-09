@@ -2,11 +2,11 @@ import { LimitedCollection, Snowflake } from 'discord.js';
 import { GClient } from 'gcommands';
 
 export class BlacklistManagerClass {
-    cache: LimitedCollection<Snowflake, boolean>;
+	cache: LimitedCollection<Snowflake, boolean>;
 
-    constructor() {
-        this.cache = new LimitedCollection({ maxSize: 100 });
-    }
+	constructor() {
+		this.cache = new LimitedCollection({ maxSize: 100 });
+	}
 
 	init(): void {
 		return;
@@ -25,8 +25,8 @@ export class BlacklistManagerClass {
 	private async _getBlacklist(client: GClient, userId: Snowflake): Promise<boolean> {
 		const db = (client.getDatabase() as any);
 
-        if (String(this.cache.get(userId)) !== 'undefined') return this.cache.get(userId);
-		let result: boolean = false;
+		if (String(this.cache.get(userId)) !== 'undefined') return this.cache.get(userId);
+		let result = false;
 
 		if (db.type === 'mongodb') {
 			result = (await db.get('plugin-blacklist', { userId }))?.blacklisted;
@@ -43,7 +43,7 @@ export class BlacklistManagerClass {
 	private async _setBlacklist(client: GClient, userId: Snowflake, blacklisted: boolean) {
 		const db = (client.getDatabase() as any);
 
-        this.cache.set(userId, blacklisted);
+		this.cache.set(userId, blacklisted);
 
 		if (db.type === 'mongodb') {
 			return await db.insert('plugin-blacklist', { userId, blacklisted });

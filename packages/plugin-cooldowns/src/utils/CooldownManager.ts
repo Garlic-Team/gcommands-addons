@@ -3,11 +3,11 @@ import { GClient } from 'gcommands';
 import ms from 'ms';
 
 export class CooldownManager {
-    cache: LimitedCollection<Snowflake, number>;
+	cache: LimitedCollection<Snowflake, number>;
 
-    constructor() {
-        this.cache = new LimitedCollection({ maxSize: 100 });
-    }
+	constructor() {
+		this.cache = new LimitedCollection({ maxSize: 100 });
+	}
 
 	init(): void {
 		return;
@@ -27,7 +27,7 @@ export class CooldownManager {
 		const db = (client.getDatabase() as any);
 
 		if (this.cache.get(userId)) return this.cache.get(userId);
-		let result: number = 0;
+		let result = 0;
 
 		if (db.type === 'mongodb') {
 			result = (await db.get('plugin-cooldowns', { userId }))?.cooldown;
