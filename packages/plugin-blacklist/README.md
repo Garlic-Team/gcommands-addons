@@ -41,3 +41,10 @@ const client = new GClient({
 
 Plugins.search(__dirname)
 ```
+
+```js
+const { BlacklistManager } = require('@gcommands/plugin-blacklist');
+
+BlacklistManager.setBlacklist(client, userId, true); // blacklisted
+BlacklistManager.setBlacklist(client, userId, false); // unblacklisted
+```
