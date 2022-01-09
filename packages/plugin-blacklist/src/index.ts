@@ -15,3 +15,6 @@ new Plugin(pluginName, (client) => {
 
 	BlacklistManager.init();
 });
+
+export * from './inhibitors/BlacklistInhibitor';
+export * from './utils/BlacklistManager';
