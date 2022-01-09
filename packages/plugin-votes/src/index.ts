@@ -26,6 +26,8 @@ export default (options: PluginVotesOptions) => {
 	if (!options.webhookToken) return Logger.error('Please define webhookToken', pluginName);
 
 	new Plugin(pluginName, (client) => {
+		if (!client.getDatabase()) return Logger.error('Please add the database parameter to the client.', pluginName);
+		
 		client.isVoted = new isVoted(client, options.dblToken, client.getDatabase());
     
 		expressServer(client.isVoted, options.webhookToken, options.port);

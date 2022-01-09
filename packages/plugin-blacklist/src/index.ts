@@ -1,5 +1,9 @@
-import { Plugin } from 'gcommands';
+import { Logger, Plugin } from 'gcommands';
 
-new Plugin('@gcommands/plugin-blacklist', () => {
+const pluginName = '@gcommands/plugin-blacklist'
+
+new Plugin(pluginName, (client) => {
+	if (!client.getDatabase()) return Logger.error('Please add the database parameter to the client.', pluginName);
+
 	console.log('no empty')
 });
