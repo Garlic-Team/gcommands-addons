@@ -9,6 +9,8 @@
     <br />
     <img src="https://img.shields.io/npm/v/@gcommands/plugin-votes?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-votes" />
     <img src="https://img.shields.io/npm/v/@gcommands/plugin-moreevents?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-moreevents" />
+    <img src="https://img.shields.io/npm/v/@gcommands/plugin-cooldowns?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-cooldowns" />
+    <img src="https://img.shields.io/npm/v/@gcommands/plugin-blacklist?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-blacklist" />
   </p>
   <p>
     <a href="https://ko-fi.com/H2H05FNRL"><img src="https://img.shields.io/badge/Kofi-Donate-yellow?style=for-the-badge" height="30" /></a>
@@ -20,11 +22,4 @@
 ---
 
 This repo is used for the base GCommands Official Addons.
-
-Currently plugins:
-- moreEvents
-
-Currently inhibitors:
-- X
-
 You can always find out how to install and use the plugin on the NPM page, or just go to the `packages/{name}` folder
