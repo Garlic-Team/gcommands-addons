@@ -1,6 +1,6 @@
-name: "Next Release"
+name: 'Next Release'
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       name:
@@ -23,12 +23,12 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Release ${{ github.event.inputs.name }}
-        run: | 
+        run: |
           cd packages/${{ github.event.inputs.name }}
           npm ci
           npm run build
           npm deprecate gcommands-plugin-${{ github.event.inputs.name }}@"~$(jq --raw-output '.version' package.json)" "no longer supported" || true
           npm version --git-tag-version=false $(jq --raw-output '.version' package.json).$(date +%s)
-          npm publish  --tag next || true
+          npm publish --access public --tag next || true
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
