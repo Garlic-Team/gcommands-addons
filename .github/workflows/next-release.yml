@@ -26,7 +26,8 @@ jobs:
         run: |
           cd packages/${{ github.event.inputs.name }}
           npm ci
-          npm run build
+          npm run build:babel
+          npm run build:types
           npm deprecate gcommands-plugin-${{ github.event.inputs.name }}@"~$(jq --raw-output '.version' package.json)" "no longer supported" || true
           npm version --git-tag-version=false $(jq --raw-output '.version' package.json).$(date +%s)
           npm publish --access public --tag next || true

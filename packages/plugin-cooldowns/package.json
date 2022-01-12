@@ -1,6 +1,6 @@
 {
   "name": "@gcommands/plugin-cooldowns",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Set cooldown for your command",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
