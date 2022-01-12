@@ -1,6 +1,6 @@
-name: "Release"
+name: 'Release'
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       name:
@@ -23,7 +23,8 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Release ${{ github.event.inputs.name }}
-        run: | 
+        run: |
+          npm ci
           cd packages/${{ github.event.inputs.name }}
           npm ci
           npm run build
