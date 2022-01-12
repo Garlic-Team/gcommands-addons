@@ -1,6 +1,6 @@
 {
   "name": "@gcommands/plugin-blacklist",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Add/remove user from blacklist",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,10 +30,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^17.0.4",
+    "discord.js": "^13.5.1",
+    "gcommands": "^9.0.0-next",
     "typescript": "^4.5.4"
-  },
-  "dependencies": {
-    "discord.js": "^13.5.0",
-    "gcommands": "^9.0.0-next.1641485796"
   }
 }
