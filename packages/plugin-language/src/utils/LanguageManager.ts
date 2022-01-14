@@ -1,23 +1,16 @@
 import { CommandInteraction, ContextMenuInteraction } from 'discord.js';
-import { readFileSync } from 'fs';
+import { GClient } from 'gcommands';
 
 export class LanguageManager {
-    languageText: object;
-    defaultLanguage: string;
-
-    constructor() {
-        this.languageText = {};
-        this.defaultLanguage = '';
-    }
-
     public static __(i: CommandInteraction | ContextMenuInteraction, name: string) {
-        const language = i?.locale || i?.guildLocale;
+        const client = i.client as GClient;
+        const language = i?.locale || i?.guildLocale || client.__lang__.defaultLanguage;
         
-        return LanguageManager.getLanguage(language, name);
+        return LanguageManager.getLanguage(client.__lang__, language, name);
     }
 
-    private static getLanguage(language: string, name: string) {
-        const json = JSON.parse(readFileSync(`${__dirname}/../responses.json`, 'utf-8'));
+    private static getLanguage(lang: { defaultLanguage?: string; languageText?: object; }, language: string, name: string) {
+        const json = lang.languageText;
 
         return json[language][name];
     }

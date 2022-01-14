@@ -5,7 +5,7 @@
     
   <br />
   <p>
-    <a href="https://www.npmjs.com/package/@gcommands/plugin-moreevents"><img src="https://nodei.co/npm/@gcommands/plugin-moreevents.png?downloads=true&stars=true" alt="NPM Banner"></a>
+    <a href="https://www.npmjs.com/package/@gcommands/plugin-language"><img src="https://nodei.co/npm/@gcommands/plugin-language.png?downloads=true&stars=true" alt="NPM Banner"></a>
     <br />
     <a href="https://discord.gg/AjKJSBbGm2"><img src="https://discord.com/api/guilds/833628077556367411/embed.png?style=banner2" /></a>
   </p>
@@ -23,63 +23,129 @@
 Install with [npm](https://www.npmjs.com/) / [yarn](https://yarnpkg.com) / [pnpm](https://pnpm.js.org/):
 
 ```sh
-npm install @gcommands/plugin-moreevents
-yarn add @gcommands/plugin-moreevents
-pnpm add @gcommands/plugin-moreevents
+npm install @gcommands/plugin-language
+yarn add @gcommands/plugin-language
+pnpm add @gcommands/plugin-language
 ```
 
 ```js
+// index.js
 const { Plugins } = require('gcommands');
-require('@gcommands/plugin-moreevents'); // typings inject
+const { readFileSync } = require('fs');
+
+require('@gcommands/plugin-language')({
+  defaultLanguage: 'en-GB',
+  languageText: JSON.parse(readFileSync(`${__dirname}/responses.json`, 'utf-8'))
+});
+
+// responses.json
+{
+  "en-GB": {
+    "hello": "Hello!"
+  },
+  "en-US": {
+    "hello": "Hello!"
+  },
+  "da": {
+    "hello": "Hej"
+  },
+  "de": {
+    "hello": "Hallo"
+  },
+  "es-ES": {
+
+  },
+  "fr": {
+
+  },
+  "hr": {
+
+  },
+  "it": {
+      
+  },
+  "lt": {
+
+  },
+  "hu": {
+
+  },
+  "nl": {
+
+  },
+  "no": {
+      
+  },
+  "pl": {
+
+  },
+  "pt-BR": {
+
+  },
+  "ro": {
+      
+  },
+  "fi": {
+
+  },
+  "sv-SE": {
+
+  },
+  "vi": {
+
+  },
+  "tr": {
+
+  },
+  "cs": {
+
+  },
+  "el": {
+
+  },
+  "bg": {
+
+  },
+  "ru": {
+      
+  },
+  "uk": {
+
+  },
+  "hi": {
+
+  },
+  "th": {
+
+  },
+  "zh-CN": {
+
+  },
+  "ja": {
+
+  },
+  "zh-TW": {
+
+  },
+  "ko": {
+      
+  }
+}
+// ^ 
 
 Plugins.search(__dirname)
+
+// command.js
+const { Command } = require('gcommands');
+const { LanguageManager } = require('@gcommands/plugin-language');
+
+new Command({
+  run: (ctx) => {
+    const hello = LanguageManager.__(ctx.interaction, 'hello');
+
+    ctx.reply({
+      content: hello
+    });
+  }
+})
 ```
-
-Now when you create a listener, more events will show up.
-
-List of events:
-- selectMenu
-- clickButton
-
-- guildBoostLevelUp
-- guildBoostLevelDown
-- guildRegionUpdate
-- guildBannerUpdate
-- guildAfkChannelUpdate
-- guildVanityURLUpdate
-- guildFeaturesUpdate
-- guildAcronymUpdate
-- guildOwnerUpdate
-- guildMaximumMembersUpdate
-- guildPartnerUpdate
-- guildVerifyUpdate
-
-- threadStateUpdate
-- threadNameUpdate
-- threadLockStateUpdate
-- threadRateLimitPerUserUpdate
-- threadAutoArchiveDurationUpdate
-
-- voiceChannelJoin
-- voiceChannelLeave
-- voiceChannelSwitch
-- voiceChannelMute
-- voiceChannelUnmute
-- voiceChannelDeaf
-- voiceChannelUndeaf
-- voiceStreamingStart
-- voiceStreamingStop
-
-- guildMemberNicknameUpdate
-- guildMemberAcceptShipScreening
-- guildMemberBoost
-- guildMemberUnboost
-
-- userAvatarUpdate
-- userUsernameUpdate
-- userDiscriminatorUpdate
-- userFlagsUpdate
-- userBannerUpdate
-
-- rolePositionUpdate
-- rolePermissionsUpdate
