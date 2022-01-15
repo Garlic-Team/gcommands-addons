@@ -32,5 +32,7 @@
   color: 'fbca04'
 - name: 'packages: plugin-votes'
   color: 'fbca04'
+- name: 'packages: plugin-language'
+  color: 'fbca04'
 - name: 'chore'
   color: 'ffffff'
