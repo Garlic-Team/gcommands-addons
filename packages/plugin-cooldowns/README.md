@@ -41,7 +41,7 @@ const client = new GClient({
     database: new MongoDBProvider(process.env.mongodb_uri);
 })
 
-Plugins.search(__dirname)
+Plugins.search(__dirname);
 
 // command.js
 const { Command } = require('gcommands');

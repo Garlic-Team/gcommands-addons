@@ -32,7 +32,7 @@ pnpm add @gcommands/plugin-moreevents
 const { Plugins } = require('gcommands');
 require('@gcommands/plugin-moreevents'); // typings inject
 
-Plugins.search(__dirname)
+Plugins.search(__dirname);
 ```
 
 Now when you create a listener, more events will show up.

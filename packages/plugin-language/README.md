@@ -38,6 +38,8 @@ require('@gcommands/plugin-language')({
   languageText: JSON.parse(readFileSync(`${__dirname}/responses.json`, 'utf-8'))
 });
 
+Plugins.search(__dirname);
+
 // responses.json
 {
   "en-GB": {
@@ -132,8 +134,6 @@ require('@gcommands/plugin-language')({
   }
 }
 // ^ 
-
-Plugins.search(__dirname)
 
 // command.js
 const { Command } = require('gcommands');

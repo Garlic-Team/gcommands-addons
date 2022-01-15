@@ -43,7 +43,7 @@ require('@gcommands/plugin-votes').default({
     webhookToken: 'random token for webhook'
 })
 
-Plugins.search(__dirname)
+Plugins.search(__dirname);
 
 // command.js
 const { Command } = require('gcommands');
