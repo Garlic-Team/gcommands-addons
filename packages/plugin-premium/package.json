@@ -1,7 +1,7 @@
 {
-  "name": "@gcommands/plugin-blacklist",
-  "version": "1.0.3",
-  "description": "Add/remove user from blacklist",
+  "name": "@gcommands/plugin-premium",
+  "version": "1.0.0",
+  "description": "Add/remove user from premium",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -14,7 +14,7 @@
   "keywords": [
     "gcommands",
     "plugin",
-    "cooldowns",
+    "premium",
     "database",
     "discord.js"
   ],
