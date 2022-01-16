@@ -43,10 +43,10 @@ Plugins.search(__dirname);
 ```
 
 ```js
-const { BlacklistManager } = require('@gcommands/plugin-blacklist');
+const { PremiumInhibitor } = require('@gcommands/plugin-blacklist');
 
-BlacklistManager.setBlacklist(client, userId, true); // blacklisted
-BlacklistManager.setBlacklist(client, userId, false); // unblacklisted
+PremiumInhibitor.setBlacklist(client, userId, true); // blacklisted
+PremiumInhibitor.setBlacklist(client, userId, false); // unblacklisted
 ```
 
-If you have inhibitors in command, you need add `new BlacklistInhibitor();`
+If you have inhibitors in command, you need add `new PremiumInhibitor();`

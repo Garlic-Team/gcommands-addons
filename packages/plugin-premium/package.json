@@ -1,0 +1,37 @@
+{
+  "name": "@gcommands/plugin-blacklist",
+  "version": "1.0.3",
+  "description": "Add/remove user from blacklist",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "bash ../../scripts/build.bash",
+    "build:babel": "npx babel --extensions .ts ./src -d ./dist --minified --copy-files --config-file ../../babel.config.js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "lint": "npx eslint . --fix -c ../../.eslintrc.json"
+  },
+  "keywords": [
+    "gcommands",
+    "plugin",
+    "cooldowns",
+    "database",
+    "discord.js"
+  ],
+  "author": "Garlic-Team",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garlic-Team/gcommands-addons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Garlic-Team/gcommands-addons/issues"
+  },
+  "homepage": "https://github.com/Garlic-Team/gcommands-addons#readme",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.4",
+    "discord.js": "^13.5.1",
+    "gcommands": "^9.0.0-next",
+    "typescript": "^4.5.4"
+  }
+}
