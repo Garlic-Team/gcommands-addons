@@ -1,20 +1,20 @@
 import { Command, Logger, Plugin } from 'gcommands';
-import { BlacklistInhibitor } from './inhibitors/BlacklistInhibitor';
-import { BlacklistManager } from './utils/BlacklistManager';
+import { PremiumInhibitor } from './inhibitors/PremiumInhibitor';
+import { PremiumManager } from './utils/PremiumManager';
 
-const pluginName = '@gcommands/plugin-blacklist';
+const pluginName = '@gcommands/plugin-premium';
 
 Command.setDefaults({
 	inhibitors: [
-		new BlacklistInhibitor()
+		new PremiumInhibitor()
 	]
 });
 
 new Plugin(pluginName, (client) => {
 	if (!client.getDatabase()) return Logger.error('Please add the database parameter to the client.', pluginName);
 
-	BlacklistManager.init();
+	PremiumManager.init();
 });
 
-export * from './inhibitors/BlacklistInhibitor';
-export * from './utils/BlacklistManager';
+export * from './inhibitors/PremiumInhibitor';
+export * from './utils/PremiumManager';
