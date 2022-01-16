@@ -1,11 +1,11 @@
 <div align="center">
     
-   # <img src="https://cdn.discordapp.com/avatars/834822955229380619/7d0142158babe0375e7cc633e87c06d4.png" height="30"> GCommands Plugin Blacklist
+   # <img src="https://cdn.discordapp.com/avatars/834822955229380619/7d0142158babe0375e7cc633e87c06d4.png" height="30"> GCommands Plugin Premium
    ### Official plugin for GCommands
     
   <br />
   <p>
-    <a href="https://www.npmjs.com/package/@gcommands/plugin-blacklist"><img src="https://nodei.co/npm/@gcommands/plugin-blacklist.png?downloads=true&stars=true" alt="NPM Banner"></a>
+    <a href="https://www.npmjs.com/package/@gcommands/plugin-premium"><img src="https://nodei.co/npm/@gcommands/plugin-premium.png?downloads=true&stars=true" alt="NPM Banner"></a>
     <br />
     <a href="https://discord.gg/AjKJSBbGm2"><img src="https://discord.com/api/guilds/833628077556367411/embed.png?style=banner2" /></a>
   </p>
@@ -43,10 +43,10 @@ Plugins.search(__dirname);
 ```
 
 ```js
-const { PremiumInhibitor } = require('@gcommands/plugin-blacklist');
+const { PremiumManager } = require('@gcommands/plugin-premium');
 
-PremiumInhibitor.setBlacklist(client, userId, true); // blacklisted
-PremiumInhibitor.setBlacklist(client, userId, false); // unblacklisted
+PremiumManager.setPremium(client, userId, true); // set premium
+PremiumManager.setPremium(client, userId, false); // remove premium
 ```
 
 If you have inhibitors in command, you need add `new PremiumInhibitor();`
