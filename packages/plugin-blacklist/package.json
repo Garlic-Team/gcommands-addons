@@ -14,7 +14,7 @@
   "keywords": [
     "gcommands",
     "plugin",
-    "cooldowns",
+    "blacklist",
     "database",
     "discord.js"
   ],
