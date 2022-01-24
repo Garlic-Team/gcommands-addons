@@ -1,7 +1,7 @@
 {
   "name": "@gcommands/plugin-premium",
   "version": "1.0.0",
-  "description": "Add/remove user from premium",
+  "description": "Easy to use premium system",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

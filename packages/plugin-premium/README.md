@@ -23,9 +23,9 @@
 Install with [npm](https://www.npmjs.com/) / [yarn](https://yarnpkg.com) / [pnpm](https://pnpm.js.org/):
 
 ```sh
-npm install @gcommands/plugin-blacklist
-yarn add @gcommands/plugin-blacklist
-pnpm add @gcommands/plugin-blacklist
+npm install @gcommands/plugin-premium
+yarn add @gcommands/plugin-premium
+pnpm add @gcommands/plugin-premium
 ```
 
 ## Informations

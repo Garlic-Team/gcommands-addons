@@ -1,7 +1,7 @@
 {
   "name": "@gcommands/plugin-blacklist",
   "version": "1.0.3",
-  "description": "Add/remove user from blacklist",
+  "description": "Easy to use blacklist system",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
