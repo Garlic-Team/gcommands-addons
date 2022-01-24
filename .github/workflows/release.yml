@@ -22,6 +22,20 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
 
+      - name: Get version & asign
+        id: get_version
+        run: |
+          cd packages/${{ github.event.inputs.name }}
+          variable=$(jq --raw-output '.version' package.json)
+          echo ::set-output name=version::$variable
+
+      - name: Publish releases
+        uses: ncipollo/release-action@v1
+        with:
+          tag: '@gcommands/${{ github.event.inputs.name }}@${{ steps.get_version.outputs.version }}'
+          name: '@gcommands/${{ github.event.inputs.name }}@${{ steps.get_version.outputs.version }}'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Release ${{ github.event.inputs.name }}
         run: |
           npm ci
