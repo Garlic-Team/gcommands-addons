@@ -32,7 +32,7 @@
     "@types/node": "17.0.4",
     "discord.js": "13.5.1",
     "gcommands": "9.0.0-next",
-    "typescript": "4.5.4"
+    "typescript": "4.5.5"
   },
   "dependencies": {
     "ms": "^2.1.3"
