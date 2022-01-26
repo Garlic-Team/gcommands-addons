@@ -26,7 +26,7 @@ export class CooldownInhibitor extends Inhibitor.Inhibitor {
 		const dynamicWhitelist = this.getWhitelist?.(ctx);
 		if (dynamicWhitelist) this.whitelist = dynamicWhitelist;
 
-		if (this.whitelist.includes(ctx.userId)) return true;
+		if (this.whitelist?.includes(ctx.userId)) return true;
 
 		const hasCooldown = await Cooldowns.hasCooldown(ctx.client, ctx.userId);
 		if (hasCooldown) {
