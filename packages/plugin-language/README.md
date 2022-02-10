@@ -33,20 +33,28 @@ pnpm add @gcommands/plugin-language
 const { Plugins } = require('gcommands');
 const { readFileSync } = require('fs');
 
-require('@gcommands/plugin-language')({
+require('@gcommands/plugin-language').default({
   defaultLanguage: 'en-GB',
   languageText: JSON.parse(readFileSync(`${__dirname}/responses.json`, 'utf-8'))
 });
 
 Plugins.search(__dirname);
 
+// ERROR, COOLDOWN, NOT_FOUND are default in GCommands (you can change it via plugin-language)
+
 // responses.json
 {
   "en-GB": {
-    "hello": "Hello!"
+    "hello": "Hello!",
+    "ERROR": "Broken :(",
+    "COOLDOWN": "You need wait {duration} for {name}",
+    "NOT_FOUND": "Undefined command"
   },
   "en-US": {
-    "hello": "Hello!"
+    "hello": "Hello!",
+    "ERROR": "Broken :(",
+    "COOLDOWN": "You need wait {duration} for {name}",
+    "NOT_FOUND": "Undefined command"
   },
   "da": {
     "hello": "Hej"
