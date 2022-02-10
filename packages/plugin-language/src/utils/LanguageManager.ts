@@ -1,8 +1,8 @@
-import { CommandInteraction, ContextMenuInteraction } from 'discord.js';
+import { Client, Interaction } from 'discord.js';
 import { GClient } from 'gcommands';
 
 export class LanguageManager {
-    public static __(i: CommandInteraction | ContextMenuInteraction, name: string) {
+    public static __(i: { client: Client | GClient, locale?: string, guildLocale?: string } | Interaction, name: string) {
         const client = i.client as GClient;
         const language = i?.locale || i?.guildLocale || client.__lang__.defaultLanguage;
         
