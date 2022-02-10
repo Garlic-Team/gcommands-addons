@@ -6,7 +6,7 @@ new Listener({
 	run: (oldMember, newMember) => {
 		const client = oldMember.client;
 
-		if (oldMember.premiumSince && newMember.premiumSince) {
+		if (newMember.premiumSince) {
 			client.emit('guildMemberBoost',
 				newMember,
 				oldMember.premiumSince,
@@ -30,7 +30,7 @@ new Listener({
 			);
 		}
 
-		if (!oldMember.isCommunicationDisabled && newMember.isCommunicationDisabled) {
+		if (!oldMember.isCommunicationDisabled() && newMember.isCommunicationDisabled()) {
 			client.emit('guildMemberTimeoutAdded',
 				newMember,
 				oldMember.communicationDisabledUntil,
@@ -38,15 +38,15 @@ new Listener({
 			);
 		}
 
-		if (oldMember.isCommunicationDisabled && !newMember.isCommunicationDisabled) {
+		if (oldMember.isCommunicationDisabled() && !newMember.isCommunicationDisabled()) {
 			client.emit('guildMemberTimeoutRemoved',
 				newMember,
 				oldMember.communicationDisabledUntil,
-				newMember.communicationDisabledUntil
+				null
 			);
 		}
 
-		if (oldMember.isCommunicationDisabled && oldMember.communicationDisabledUntilTimestamp !== newMember.communicationDisabledUntilTimestamp) {
+		if (oldMember.isCommunicationDisabled() && oldMember.communicationDisabledUntilTimestamp !== newMember.communicationDisabledUntilTimestamp) {
 			client.emit('guildMemberTimeoutChanged',
 				newMember,
 				oldMember.communicationDisabledUntil,
