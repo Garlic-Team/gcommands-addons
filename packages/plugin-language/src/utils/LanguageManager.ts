@@ -10,7 +10,7 @@ export class LanguageManager {
     }
 
     private static getLanguage(lang: { defaultLanguage?: string; languageText?: object; }, language: string, name: string) {
-        const json = lang.languageText;
+        const json = lang?.languageText;
 
         return json[language][name];
     }
