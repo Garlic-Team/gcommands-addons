@@ -28,12 +28,12 @@ export class BlacklistManagerClass {
 		if (String(this.cache.get(userId)) !== 'undefined') return this.cache.get(userId);
 		let result = false;
 
-		if (db.type === 'mongodb') {
-			result = (await db.get('plugin-blacklist', { userId }))?.blacklisted;
-		} else if (db.type === 'prismaio') {
-			result = (await db.get('plugin-blacklist', { userId }))?.blacklisted;
+		if (db?.type === 'mongodb') {
+			result = (await db?.get('plugin-blacklist', { userId }))?.blacklisted;
+		} else if (db?.type === 'prismaio') {
+			result = (await db?.get('plugin-blacklist', { userId }))?.blacklisted;
 		} else {
-			result = (await db.get(`plugin-blacklist-${userId}}`));
+			result = (await db?.get(`plugin-blacklist-${userId}}`));
 		}
 
 		this.cache.set(userId, result);
@@ -45,12 +45,12 @@ export class BlacklistManagerClass {
 
 		this.cache.set(userId, blacklisted);
 
-		if (db.type === 'mongodb') {
-			return await db.insert('plugin-blacklist', { userId, blacklisted });
-		} else if (db.type === 'prismaio') {
-			return await db.insert('plugin-blacklist', { userId, blacklisted });
+		if (db?.type === 'mongodb') {
+			return await db?.insert('plugin-blacklist', { userId, blacklisted });
+		} else if (db?.type === 'prismaio') {
+			return await db?.insert('plugin-blacklist', { userId, blacklisted });
 		} else {
-			return await db.insert(`plugin-blacklist-${userId}}`, blacklisted);
+			return await db?.insert(`plugin-blacklist-${userId}}`, blacklisted);
 		}
 	}
 }
