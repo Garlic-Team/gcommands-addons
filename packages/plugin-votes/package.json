@@ -1,6 +1,6 @@
 {
   "name": "@gcommands/plugin-votes",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Check if user has vote",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,8 +8,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "bash ../../scripts/build.bash",
     "build:babel": "npx babel --extensions .ts ./src -d ./dist --copy-files --config-file ../../babel.config.js",
+    "build:esm": "gen-esm-wrapper dist/index.js dist/index.mjs",
     "build:types": "tsc --emitDeclarationOnly",
     "lint": "npx eslint . --fix -c ../../.eslintrc.json"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   },
   "keywords": [
     "gcommands",

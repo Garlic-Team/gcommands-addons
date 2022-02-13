@@ -29,12 +29,12 @@ export class CooldownManager {
 		if (this.cache.get(userId)) return this.cache.get(userId);
 		let result = 0;
 
-		if (db.type === 'mongodb') {
-			result = (await db.get('plugin-cooldowns', { userId }))?.cooldown;
-		} else if (db.type === 'prismaio') {
-			result = (await db.get('plugin-cooldowns', { userId }))?.cooldown;
+		if (db?.type === 'mongodb') {
+			result = (await db?.get('plugin-cooldowns', { userId }))?.cooldown;
+		} else if (db?.type === 'prismaio') {
+			result = (await db?.get('plugin-cooldowns', { userId }))?.cooldown;
 		} else {
-			result = (await db.get(`plugin-cooldowns-${userId}}`));
+			result = (await db?.get(`plugin-cooldowns-${userId}}`));
 		}
 
 		this.cache.set(userId, result);
@@ -47,12 +47,12 @@ export class CooldownManager {
 
 		this.cache.set(userId, cldwn);
 
-		if (db.type === 'mongodb') {
-			return await db.insert('plugin-cooldowns', { userId, cooldown: cldwn, expires: new Date(cldwn) });
-		} else if (db.type === 'prismaio') {
-			return await db.insert('plugin-cooldowns', { userId, cooldown: cldwn });
+		if (db?.type === 'mongodb') {
+			return await db?.insert('plugin-cooldowns', { userId, cooldown: cldwn, expires: new Date(cldwn) });
+		} else if (db?.type === 'prismaio') {
+			return await db?.insert('plugin-cooldowns', { userId, cooldown: cldwn });
 		} else {
-			return await db.insert(`plugin-cooldowns-${userId}}`, cldwn);
+			return await db?.insert(`plugin-cooldowns-${userId}}`, cldwn);
 		}
 	}
 }

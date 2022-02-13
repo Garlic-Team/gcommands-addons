@@ -27,11 +27,11 @@ export class isVoted {
 			}).catch(e => e);
 
 			if (parseInt(res.data['voted']) > 1) {
-				this.cache.set(userId, true);
+				this.cache?.set(userId, true);
 
 				return true;
 			} else {
-				this.cache.set(userId, false);
+				this.cache?.set(userId, false);
 
 				return false;
 			}
@@ -39,22 +39,22 @@ export class isVoted {
 	}
 
 	async getFromCache(userId): Promise<boolean> {
-		if (this.cache.type === 'mongodb') {
-			return (await this.cache.get('plugin-votes', { userId })).voted;
-		} else if (this.cache.type === 'prismaio') {
-			return (await this.cache.get('plugin-votes', { userId })).voted;
+		if (this.cache?.type === 'mongodb') {
+			return (await this.cache?.get('plugin-votes', { userId })).voted;
+		} else if (this.cache?.type === 'prismaio') {
+			return (await this.cache?.get('plugin-votes', { userId })).voted;
 		} else {
-			return (await this.cache.get(`plugin-votes-${userId}`));
+			return (await this.cache?.get(`plugin-votes-${userId}`));
 		}
 	}
 
 	async setToDatabase(userId, voted) {
-		if (this.cache.type === 'mongodb') {
-			return await this.cache.insert('plugin-votes', { userId, voted, expires: new Date(Date.now() + 43200000) });
-		} else if (this.cache.type === 'prismaio') {
-			return await this.cache.insert('plugin-votes', { userId, voted });
+		if (this.cache?.type === 'mongodb') {
+			return await this.cache?.insert('plugin-votes', { userId, voted, expires: new Date(Date.now() + 43200000) });
+		} else if (this.cache?.type === 'prismaio') {
+			return await this.cache?.insert('plugin-votes', { userId, voted });
 		} else {
-			return await this.cache.insert(`plugin-votes-${userId}`, voted);
+			return await this.cache?.insert(`plugin-votes-${userId}`, voted);
 		}
 	}
 }
