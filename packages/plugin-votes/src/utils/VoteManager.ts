@@ -54,21 +54,21 @@ export class VoteManager {
 
 	async getFromCache(userId): Promise<number|boolean> {
 		if (this.cache?.type === 'mongodb') {
-			return (await this.cache?.get('plugin-votes', { userId })).voted;
+			return (await this.cache?.get?.('plugin-votes', { userId }))?.voted;
 		} else if (this.cache?.type === 'prismaio') {
-			return (await this.cache?.get('plugin-votes', { userId })).voted;
+			return (await this.cache?.get?.('plugin-votes', { userId }))?.voted;
 		} else {
-			return (await this.cache?.get(`plugin-votes-${userId}`));
+			return (await this.cache?.get?.(`plugin-votes-${userId}`));
 		}
 	}
 
 	async setToDatabase(userId, expire) {
 		if (this.cache?.type === 'mongodb') {
-			return await this.cache?.insert('plugin-votes', { userId, voted: expire, expires: expire });
+			return await this.cache?.insert?.('plugin-votes', { userId, voted: expire, expires: expire });
 		} else if (this.cache?.type === 'prismaio') {
-			return await this.cache?.insert('plugin-votes', { userId, voted: expire });
+			return await this.cache?.insert?.('plugin-votes', { userId, voted: expire });
 		} else {
-			return await this.cache?.insert(`plugin-votes-${userId}`, expire);
+			return await this.cache?.insert?.(`plugin-votes-${userId}`, expire);
 		}
 	}
 }

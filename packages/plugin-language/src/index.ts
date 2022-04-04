@@ -18,19 +18,19 @@ export interface PluginLanguageOptions {
 }
 
 export default (options: PluginLanguageOptions) => {
-    const defaultLanguage = options.defaultLanguage;
-    const languageText = options.languageText;
+	const defaultLanguage = options.defaultLanguage;
+	const languageText = options.languageText;
 
-    new Plugin('@gcommands/plugin-language', (client) => {
-        Object.defineProperty(client, '__lang__', {
-            value: {
-                defaultLanguage: defaultLanguage,
-                languageText: languageText || JSON.parse(readFileSync(`${__dirname}/responses.json`, 'utf-8')),
-            },
-            writable: false
-        })
-    });
-}
+	new Plugin('@gcommands/plugin-language', (client) => {
+		Object.defineProperty(client, '__lang__', {
+			value: {
+				defaultLanguage: defaultLanguage,
+				languageText: languageText || JSON.parse(readFileSync(`${__dirname}/responses.json`, 'utf-8')),
+			},
+			writable: false
+		});
+	});
+};
 
 export * from './utils/LanguageManager';
 export * as i18n from './utils/LanguageManager';

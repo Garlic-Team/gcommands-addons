@@ -1,5 +1,4 @@
-import { Command, Logger, Plugin } from 'gcommands';
-import { PremiumInhibitor } from './inhibitors/PremiumInhibitor';
+import { Logger, Plugin } from 'gcommands';
 import { PremiumManager } from './utils/PremiumManager';
 
 const pluginName = '@gcommands/plugin-premium';

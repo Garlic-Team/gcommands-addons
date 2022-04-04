@@ -63,13 +63,13 @@ export default (options: PluginVotesOptions) => {
 					return {
 						listType: options.listTypes[i] as ListTypes,
 						apiKey: options.apiKeys[i]
-					}
+					};
 				}) : [
 					{
 						listType: options.listTypes  as ListTypes,
 						apiKey: options.apiKeys
 					}
-				] as Keys[]
+				] as Keys[];
 
 		const manager = new VoteManager(client, keys, client.getDatabase());
 
@@ -98,7 +98,7 @@ export const expressServer = (voteManager: VoteManager, serverAuthKey: string, p
 
 		voteManager.setToDatabase(req.body.user, new Date(Date.now() + 43200000));
 		res.status(204).end();
-	})
+	});
 
 	app.listen(port || 3000, () => {
 		Logger.debug(`Express server running at port ${port || 3000}`, pluginName);
