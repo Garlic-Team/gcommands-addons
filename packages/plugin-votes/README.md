@@ -39,8 +39,8 @@ const client = new GClient({
 
 require('@gcommands/plugin-votes').default({
     type: 'TOP.GG',
-    dblToken: 'your top.gg authorization token',
-    webhookToken: 'random token for webhook'
+    apiKeys: 'your top.gg authorization token',
+    serverAuthKey: 'random token for webhook'
 })
 
 Plugins.search(__dirname);
