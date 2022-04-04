@@ -1,51 +1,121 @@
 import { Logger, Plugin } from 'gcommands';
 import express from 'express';
-import { Webhook } from '@top-gg/sdk';
-import { isVoted } from './utils/isVoted';
-
-declare module 'gcommands' {
-    interface GClient {
-        isVoted: isVoted;
-    }
-}
+import { VoteManager } from './utils/VoteManager';
 
 const pluginName = '@gcommands/plugin-votes';
 
-type ListTypes = 'TOP.GG'
+export type ListTypes = 'TOP.GG' | 'VoidBots'
+export interface PluginVotesOptions {
+	/**
+	 * @deprecated Use listTypes instead.
+	 */
+    type: ListTypes | ListTypes[];
+	/**
+	 * @deprecated Use apiKeys instead.
+	 */
+    dblToken: string | string[];
+	/**
+	 * @deprecated Use serverAuthKey instead.
+	 */
+	webhookToken: string;
 
-interface PluginVotesOptions {
-    type: ListTypes;
-    dblToken: string;
-    webhookToken: string;
+	/**
+	 * Bot list type(s) you want to use.
+	 */
+	listTypes: ListTypes | ListTypes[];
+
+	/**
+	 * Your api key(s) for the list(s) you want to use.
+	 */
+	apiKeys: string | string[];
+
+	/**
+	 * Authorization key for the webhook server.
+	 */
+	serverAuthKey: string;
+
+	/**
+	 * The port the webhook server will listen on.
+	 */
     port?: number;
 }
 
+export interface Keys {
+	listType: ListTypes;
+	apiKey: string;
+}
+
 export default (options: PluginVotesOptions) => {
-	if (!options.type) return Logger.error('Please define type', pluginName);
-	if (!options.dblToken) return Logger.error('Please define dblToken', pluginName);
-	if (!options.webhookToken) return Logger.error('Please define webhookToken', pluginName);
+	if (options.type) options.listTypes = options.type;
+	if (options.dblToken) options.apiKeys = options.dblToken;
+	if (options.webhookToken) options.serverAuthKey = options.webhookToken;
+
+	if (!options.listTypes) return Logger.error('Missing listTypes property', pluginName);
+	if (!options.apiKeys) return Logger.error('Missing apiKeys property', pluginName);
+	if (!options.serverAuthKey) return Logger.error('Missing serverAuthKey property', pluginName);
 
 	new Plugin(pluginName, (client) => {
 		if (!client.getDatabase()) return Logger.error('Please add the database parameter to the client.', pluginName);
-		
-		client.isVoted = new isVoted(client, options.dblToken, client.getDatabase());
+
+		const keys: Keys[] = 
+			Array.isArray(options.listTypes) ?
+				options.listTypes?.map((_, i) => {
+					return {
+						listType: options.listTypes[i] as ListTypes,
+						apiKey: options.apiKeys[i]
+					}
+				}) : [
+					{
+						listType: options.listTypes  as ListTypes,
+						apiKey: options.apiKeys
+					}
+				] as Keys[]
+
+		const manager = new VoteManager(client, keys, client.getDatabase());
+
+		/**
+		 * @deprecated Use client.voteManager instead.
+		 */
+		client.isVoted = manager;
+		client.voteManager = manager;
+
+		client._listTypes = options.type;
     
-		expressServer(client.isVoted, options.webhookToken, options.port);
+		expressServer(client.voteManager, options.serverAuthKey, options.port);
 	});
 };
 
-export const expressServer = (isVoted: isVoted, authorization: string, port: number) => {
+export const expressServer = (voteManager: VoteManager, serverAuthKey: string, port: number) => {
 	const app = express();
-	const webhook = new Webhook(authorization);
+	
+	app.use(express.json());
     
-	app.post('/dblwebhook', webhook.listener(vote => {
-		isVoted.cache.set(vote.user, true);
-	}));
-    
+	app.post('/dblwebhook', (req, res) => {
+		if (req.headers.authorization !== serverAuthKey) {
+			res.status(401).send('Unauthorized');
+			return;
+		}
+
+		voteManager.setToDatabase(req.body.user, new Date(Date.now() + 43200000));
+		res.status(204).end();
+	})
+
 	app.listen(port || 3000, () => {
 		Logger.debug(`Express server running at port ${port || 3000}`, pluginName);
 	});
 };
 
 export * from './inhbitors/VoteInhibitor';
-export * from './utils/isVoted';
+export * from './utils/VoteManager';
+export * as isVoted from './utils/VoteManager';
+
+declare module 'gcommands' {
+    interface GClient {
+		/**
+		 * @deprecated Use client.voteManager instead.
+		 */
+        isVoted: VoteManager;
+		voteManager: VoteManager;
+		_listTypes: ListTypes | ListTypes[];
+    }
+}
