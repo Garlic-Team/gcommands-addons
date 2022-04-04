@@ -38,6 +38,11 @@ export interface PluginVotesOptions {
 	 * The port the webhook server will listen on.
 	 */
     port?: number;
+
+	/**
+	 * The database to use.
+	 */
+	database?: any;
 }
 
 export interface Keys {
@@ -54,8 +59,12 @@ export default (options: PluginVotesOptions) => {
 	if (!options.apiKeys) return Logger.error('Missing apiKeys property', pluginName);
 	if (!options.serverAuthKey) return Logger.error('Missing serverAuthKey property', pluginName);
 
+	if (options.database && typeof options.database.init === 'function') {
+		options.database.init();
+	}
+
 	new Plugin(pluginName, (client) => {
-		if (!client.getDatabase()) return Logger.error('Please add the database parameter to the client.', pluginName);
+		if (!options.database && !client.getDatabase()) return Logger.error('Please add the database parameter to the client/plugin.', pluginName);
 
 		const keys: Keys[] = 
 			Array.isArray(options.listTypes) ?
@@ -71,7 +80,7 @@ export default (options: PluginVotesOptions) => {
 					}
 				] as Keys[];
 
-		const manager = new VoteManager(client, keys, client.getDatabase());
+		const manager = new VoteManager(client, keys, options.database || client.getDatabase());
 
 		/**
 		 * @deprecated Use client.voteManager instead.

@@ -22,7 +22,7 @@ export class VoteManager {
 		 */
 		this.dblToken = keys[0].apiKey;
 
-		this.cache = client.getDatabase(database);
+		this.cache = database;
 	}
 
 	async voted(userId: Snowflake) {
@@ -34,16 +34,16 @@ export class VoteManager {
 				const res = await fetch(getUrl(key.listType, this.client.user.id, userId), {
 					method: 'GET',
 					headers: {
-						'Authorizarion': key.apiKey
+						'Authorization': key.apiKey
 					}
 				}).catch(e => e);
 	
-				const data = await res?.json();
+				const data = await res?.json?.();
 
-				if (data?.voted === true || data?.voted > 1) {
+				if (data?.voted === true || data?.voted == 1) {
 					this.setToDatabase(userId, new Date(Date.now() + 43200000));
 
-					break;
+					return true;
 				}
 			}
 
@@ -56,7 +56,11 @@ export class VoteManager {
 		if (this.cache?.type === 'mongodb') {
 			return (await this.cache?.get?.('plugin-votes', { userId }))?.voted;
 		} else if (this.cache?.type === 'prismaio') {
-			return (await this.cache?.get?.('plugin-votes', { userId }))?.voted;
+			return (await this.cache?.get?.('plugin-votes', {
+				where: {
+					userId
+				}
+			}))?.voted;
 		} else {
 			return (await this.cache?.get?.(`plugin-votes-${userId}`));
 		}
@@ -64,9 +68,45 @@ export class VoteManager {
 
 	async setToDatabase(userId, expire) {
 		if (this.cache?.type === 'mongodb') {
-			return await this.cache?.insert?.('plugin-votes', { userId, voted: expire, expires: expire });
+			const exist = await this.cache?.get?.('plugin-votes', {
+				userId,
+			});
+
+			if (exist) {
+				return await this.cache?.update?.(
+					'plugin-votes',
+					{
+					  userId
+					},
+					{
+					  $set: {
+							voted: expire,
+							expires: expire
+					  }
+					}
+				  );
+			} else {
+				return await this.cache?.insert?.('plugin-votes', { userId, voted: expire, expires: expire });
+			}
 		} else if (this.cache?.type === 'prismaio') {
-			return await this.cache?.insert?.('plugin-votes', { userId, voted: expire });
+			const exist = await this.cache?.get?.('plugin-votes', {
+				where: {
+					userId,
+				}
+			});
+
+			if (exist) {
+				return await this.cache?.update?.('plugin-votes', {
+					where: {
+					  userId
+					},
+					data: {
+					  voted: expire,
+					}
+				  });
+			} else {
+				return await this.cache?.insert?.('plugin-votes', { userId, voted: expire });
+			}
 		} else {
 			return await this.cache?.insert?.(`plugin-votes-${userId}`, expire);
 		}
