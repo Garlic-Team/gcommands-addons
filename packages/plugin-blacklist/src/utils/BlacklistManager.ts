@@ -31,7 +31,11 @@ export class BlacklistManagerClass {
 		if (db?.type === 'mongodb') {
 			result = (await db?.get('plugin-blacklist', { userId }))?.blacklisted;
 		} else if (db?.type === 'prismaio') {
-			result = (await db?.get('plugin-blacklist', { userId }))?.blacklisted;
+			result = (await db?.get('plugin-blacklist', {
+				where: {
+					userId: userId
+				}
+			}))?.blacklisted;
 		} else {
 			result = (await db?.get(`plugin-blacklist-${userId}}`));
 		}

@@ -32,7 +32,11 @@ export class CooldownManager {
 		if (db?.type === 'mongodb') {
 			result = (await db?.get('plugin-cooldowns', { userId }))?.cooldown;
 		} else if (db?.type === 'prismaio') {
-			result = (await db?.get('plugin-cooldowns', { userId }))?.cooldown;
+			result = (await db?.get('plugin-cooldowns', {
+				where: {
+					userId: userId
+				}
+			}))?.cooldown;
 		} else {
 			result = (await db?.get(`plugin-cooldowns-${userId}}`));
 		}

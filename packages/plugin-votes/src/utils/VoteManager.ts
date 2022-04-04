@@ -58,7 +58,7 @@ export class VoteManager {
 		} else if (this.cache?.type === 'prismaio') {
 			return (await this.cache?.get?.('plugin-votes', {
 				where: {
-					userId
+					userId: userId
 				}
 			}))?.voted;
 		} else {
