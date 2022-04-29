@@ -13,9 +13,9 @@
   },
   "homepage": "https://github.com/Garlic-Team/gcommands-addons#readme",
   "devDependencies": {
-    "@babel/cli": "7.17.6",
-    "@babel/core": "7.17.8",
-    "@babel/preset-env": "7.16.11",
+    "@babel/cli": "7.17.10",
+    "@babel/core": "7.17.10",
+    "@babel/preset-env": "7.17.10",
     "@babel/preset-typescript": "7.16.7",
     "@typescript-eslint/eslint-plugin": "5.17.0",
     "@typescript-eslint/parser": "5.17.0",
