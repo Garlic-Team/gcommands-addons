@@ -45,11 +45,6 @@ jobs:
           npm run build:docs
           cd ../plugin-votes
           npm run build:docs
-          for dir in /packages/*/
-          do
-              dir=${dir%*/}
-              echo "${dir}"
-          done
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
