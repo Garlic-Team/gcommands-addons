@@ -1,7 +1,7 @@
 {
   "name": "@gcommands/plugin-language",
-  "version": "1.0.4",
-  "description": "Extend default discord.js events for GCommands",
+  "version": "1.0.5",
+  "description": "Easy to use i18n system in gcommands",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
