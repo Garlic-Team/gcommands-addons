@@ -119,6 +119,9 @@ jobs:
           PACKAGE: ${{ matrix.package }}
         run: |
           mkdir -p out/${PACKAGE}
+          ls
+          ls docs/
+          ls docs/${PACKAGE}
           mv docs/${PACKAGE}/docs/docs.json out/gcommands_${PACKAGE}/${BRANCH_NAME}.json
 
       - name: Commit and push
