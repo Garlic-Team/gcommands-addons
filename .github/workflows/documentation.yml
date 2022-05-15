@@ -28,23 +28,27 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
 
-      - name: Install dependencies
-        run: npm ci
-
       - name: Build docs
         run: |
           cd packages/plugin-blacklist
+          npm ci
           npm run build:docs
           cd ../plugin-cooldowns
+          npm ci
           npm run build:docs
           cd ../plugin-language
+          npm ci
           npm run build:docs
           cd ../plugin-moreevents
+          npm ci
           npm run build:docs
           cd ../plugin-premium
+          npm ci
           npm run build:docs
           cd ../plugin-votes
+          npm ci
           npm run build:docs
+          cd ../../
           for dir in /packages/*/
           do
               dir=${dir%*/}
