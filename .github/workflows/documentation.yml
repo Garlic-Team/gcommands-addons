@@ -33,7 +33,7 @@ jobs:
 
       - name: Build docs
         run: |
-          for dir in /packages/*/
+          for dir in packages/*
           do
               dir=${dir%*/}
               echo "${dir}"
