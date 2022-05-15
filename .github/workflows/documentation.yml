@@ -35,26 +35,11 @@ jobs:
         run: |
           for dir in packages/*
           do
-              echo "${dir}"
+              cd $dir
+              npm ci
+              npm run build:docs
+              cd ../../
           done
-          cd packages/plugin-blacklist
-          npm ci
-          npm run build:docs
-          cd ../plugin-cooldowns
-          npm ci
-          npm run build:docs
-          cd ../plugin-language
-          npm ci
-          npm run build:docs
-          cd ../plugin-moreevents
-          npm ci
-          npm run build:docs
-          cd ../plugin-premium
-          npm ci
-          npm run build:docs
-          cd ../plugin-votes
-          npm ci
-          npm run build:docs
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
