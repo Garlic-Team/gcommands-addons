@@ -28,8 +28,16 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build docs
         run: |
+          for dir in /packages/*/
+          do
+              dir=${dir%*/}
+              echo "${dir}"
+          done
           cd packages/plugin-blacklist
           npm ci
           npm run build:docs
@@ -48,12 +56,6 @@ jobs:
           cd ../plugin-votes
           npm ci
           npm run build:docs
-          cd ../../
-          for dir in /packages/*/
-          do
-              dir=${dir%*/}
-              echo "${dir}"
-          done
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
