@@ -38,7 +38,7 @@
   "devDependencies": {
     "@types/node": "17.0.4",
     "discord.js": "13.7.0",
-    "gcommands": "9.1.0",
+    "gcommands": "9.2.0",
     "typescript": "4.6.4"
   },
   "dependencies": {
