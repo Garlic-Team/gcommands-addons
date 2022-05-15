@@ -7,18 +7,36 @@ new Listener({
 		const client = oldMember.client;
 
 		if (newMember.premiumSince) {
-			client.emit('guildMemberBoost', newMember, oldMember.premiumSince, newMember.premiumSince);
+			client.emit(
+				'guildMemberBoost',
+				newMember,
+				oldMember.premiumSince,
+				newMember.premiumSince,
+			);
 		}
 
 		if (oldMember.premiumSince && !newMember.premiumSince) {
-			client.emit('guildMemberUnboost', newMember, oldMember.premiumSince, newMember.premiumSince);
+			client.emit(
+				'guildMemberUnboost',
+				newMember,
+				oldMember.premiumSince,
+				newMember.premiumSince,
+			);
 		}
 
 		if (oldMember.nickname !== newMember.nickname) {
-			client.emit('guildMemberNicknameUpdate', newMember, oldMember.nickname, newMember.nickname);
+			client.emit(
+				'guildMemberNicknameUpdate',
+				newMember,
+				oldMember.nickname,
+				newMember.nickname,
+			);
 		}
 
-		if (!oldMember.isCommunicationDisabled() && newMember.isCommunicationDisabled()) {
+		if (
+			!oldMember.isCommunicationDisabled() &&
+			newMember.isCommunicationDisabled()
+		) {
 			client.emit(
 				'guildMemberTimeoutAdded',
 				newMember,
@@ -27,13 +45,22 @@ new Listener({
 			);
 		}
 
-		if (oldMember.isCommunicationDisabled() && !newMember.isCommunicationDisabled()) {
-			client.emit('guildMemberTimeoutRemoved', newMember, oldMember.communicationDisabledUntil, null);
+		if (
+			oldMember.isCommunicationDisabled() &&
+			!newMember.isCommunicationDisabled()
+		) {
+			client.emit(
+				'guildMemberTimeoutRemoved',
+				newMember,
+				oldMember.communicationDisabledUntil,
+				null,
+			);
 		}
 
 		if (
 			oldMember.isCommunicationDisabled() &&
-			oldMember.communicationDisabledUntilTimestamp !== newMember.communicationDisabledUntilTimestamp
+			oldMember.communicationDisabledUntilTimestamp !==
+				newMember.communicationDisabledUntilTimestamp
 		) {
 			client.emit(
 				'guildMemberTimeoutChanged',

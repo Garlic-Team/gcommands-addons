@@ -8,8 +8,12 @@ Command.setDefaults({
 	inhibitors: [new BlacklistInhibitor()],
 });
 
-new Plugin(pluginName, (client) => {
-	if (!client.getDatabase()) return Logger.error('Please add the database parameter to the client.', pluginName);
+new Plugin(pluginName, client => {
+	if (!client.getDatabase())
+		return Logger.error(
+			'Please add the database parameter to the client.',
+			pluginName,
+		);
 
 	BlacklistManager.init();
 });

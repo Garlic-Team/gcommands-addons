@@ -3,7 +3,7 @@ import { Listener } from 'gcommands';
 new Listener({
 	event: 'interactionCreate',
 	name: 'interactionCreate-moreevents',
-	run: (interaction) => {
+	run: interaction => {
 		const client = interaction.client;
 
 		if (interaction.isButton()) {

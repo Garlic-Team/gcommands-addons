@@ -1,8 +1,7 @@
 {
-	"printWidth": 120,
-	"useTabs": true,
 	"singleQuote": true,
-	"quoteProps": "as-needed",
+	"useTabs": true,
 	"trailingComma": "all",
-	"endOfLine": "lf"
+	"endOfLine": "lf",
+	"arrowParens": "avoid"
 }

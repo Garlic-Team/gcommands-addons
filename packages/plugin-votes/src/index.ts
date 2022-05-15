@@ -55,17 +55,23 @@ export default (options: PluginVotesOptions) => {
 	if (options.dblToken) options.apiKeys = options.dblToken;
 	if (options.webhookToken) options.serverAuthKey = options.webhookToken;
 
-	if (!options.listTypes) return Logger.error('Missing listTypes property', pluginName);
-	if (!options.apiKeys) return Logger.error('Missing apiKeys property', pluginName);
-	if (!options.serverAuthKey) return Logger.error('Missing serverAuthKey property', pluginName);
+	if (!options.listTypes)
+		return Logger.error('Missing listTypes property', pluginName);
+	if (!options.apiKeys)
+		return Logger.error('Missing apiKeys property', pluginName);
+	if (!options.serverAuthKey)
+		return Logger.error('Missing serverAuthKey property', pluginName);
 
 	if (options.database && typeof options.database.init === 'function') {
 		options.database.init();
 	}
 
-	new Plugin(pluginName, (client) => {
+	new Plugin(pluginName, client => {
 		if (!options.database && !client.getDatabase())
-			return Logger.error('Please add the database parameter to the client/plugin.', pluginName);
+			return Logger.error(
+				'Please add the database parameter to the client/plugin.',
+				pluginName,
+			);
 
 		const keys: Keys[] = Array.isArray(options.listTypes)
 			? options.listTypes?.map((_, i) => {
@@ -81,7 +87,11 @@ export default (options: PluginVotesOptions) => {
 					},
 			  ] as Keys[]);
 
-		const manager = new VoteManager(client, keys, options.database || client.getDatabase());
+		const manager = new VoteManager(
+			client,
+			keys,
+			options.database || client.getDatabase(),
+		);
 
 		/**
 		 * @deprecated Use client.voteManager instead.
@@ -95,7 +105,11 @@ export default (options: PluginVotesOptions) => {
 	});
 };
 
-export const expressServer = (voteManager: VoteManager, serverAuthKey: string, port: number) => {
+export const expressServer = (
+	voteManager: VoteManager,
+	serverAuthKey: string,
+	port: number,
+) => {
 	const app = express();
 
 	app.use(express.json());

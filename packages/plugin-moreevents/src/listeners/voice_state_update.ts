@@ -15,8 +15,17 @@ new Listener({
 			client.emit('voiceChannelLeave', member, oldState.channel);
 		}
 
-		if (oldState.channel && newState.channel && oldState.channel.id !== newState.channel.id) {
-			client.emit('voiceChannelSwitch', member, oldState.channel, newState.channel);
+		if (
+			oldState.channel &&
+			newState.channel &&
+			oldState.channel.id !== newState.channel.id
+		) {
+			client.emit(
+				'voiceChannelSwitch',
+				member,
+				oldState.channel,
+				newState.channel,
+			);
 		}
 
 		if (!oldState.mute && newState.mute) {

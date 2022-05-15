@@ -22,10 +22,14 @@ export class BlacklistManagerClass {
 		this._setBlacklist(client, userId, blacklist);
 	}
 
-	private async _getBlacklist(client: GClient, userId: Snowflake): Promise<boolean> {
+	private async _getBlacklist(
+		client: GClient,
+		userId: Snowflake,
+	): Promise<boolean> {
 		const db = client.getDatabase() as any;
 
-		if (String(this.cache.get(userId)) !== 'undefined') return this.cache.get(userId);
+		if (String(this.cache.get(userId)) !== 'undefined')
+			return this.cache.get(userId);
 		let result = false;
 
 		if (db?.type === 'mongodb') {
@@ -46,7 +50,11 @@ export class BlacklistManagerClass {
 		return result;
 	}
 
-	private async _setBlacklist(client: GClient, userId: Snowflake, blacklisted: boolean) {
+	private async _setBlacklist(
+		client: GClient,
+		userId: Snowflake,
+		blacklisted: boolean,
+	) {
 		const db = client.getDatabase() as any;
 
 		this.cache.set(userId, blacklisted);

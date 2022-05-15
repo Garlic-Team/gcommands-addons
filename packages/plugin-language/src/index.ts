@@ -51,11 +51,13 @@ export default (options: PluginLanguageOptions) => {
 	const defaultLanguage = options.defaultLanguage;
 	const languageText = options.languageText;
 
-	new Plugin('@gcommands/plugin-language', (client) => {
+	new Plugin('@gcommands/plugin-language', client => {
 		Object.defineProperty(client, '__lang__', {
 			value: {
 				defaultLanguage: defaultLanguage,
-				languageText: languageText || JSON.parse(readFileSync(`${__dirname}/responses.json`, 'utf-8')),
+				languageText:
+					languageText ||
+					JSON.parse(readFileSync(`${__dirname}/responses.json`, 'utf-8')),
 			},
 			writable: false,
 		});

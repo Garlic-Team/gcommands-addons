@@ -11,7 +11,9 @@ export interface CooldownInhibitorOptions extends Inhibitor.InhibitorOptions {
 
 export class CooldownInhibitor extends Inhibitor.Inhibitor {
 	public whitelist?: Array<Snowflake>;
-	public getWhitelist?(ctx: CommandContext | ComponentContext): Array<Snowflake>;
+	public getWhitelist?(
+		ctx: CommandContext | ComponentContext,
+	): Array<Snowflake>;
 	public readonly cooldown: number;
 
 	constructor(options: CooldownInhibitorOptions) {
@@ -32,8 +34,10 @@ export class CooldownInhibitor extends Inhibitor.Inhibitor {
 		if (hasCooldown) {
 			return ctx.reply({
 				content:
-					(this.resolveMessage(ctx) as string)?.replace('{duration}', `${hasCooldown}`) ||
-					`You need wait ${hasCooldown}`,
+					(this.resolveMessage(ctx) as string)?.replace(
+						'{duration}',
+						`${hasCooldown}`,
+					) || `You need wait ${hasCooldown}`,
 				ephemeral: true,
 			});
 		} else {

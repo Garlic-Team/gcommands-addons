@@ -10,7 +10,10 @@ new Listener({
 		const guildOldChannel = oldChannel as GuildChannel;
 		const guildNewChannel = newChannel as GuildChannel;
 
-		if (guildOldChannel.permissionOverwrites !== guildOldChannel.permissionOverwrites) {
+		if (
+			guildOldChannel.permissionOverwrites !==
+			guildOldChannel.permissionOverwrites
+		) {
 			client.emit(
 				'guildChannelPermissionsUpdate',
 				newChannel,
@@ -21,7 +24,8 @@ new Listener({
 
 		if (
 			guildOldChannel.type === 'GUILD_TEXT' &&
-			(guildOldChannel as TextChannel).topic !== (guildNewChannel as TextChannel).topic
+			(guildOldChannel as TextChannel).topic !==
+				(guildNewChannel as TextChannel).topic
 		) {
 			client.emit(
 				'guildChannelTopicUpdate',
@@ -33,7 +37,8 @@ new Listener({
 
 		if (
 			guildOldChannel.type === 'GUILD_TEXT' &&
-			(guildOldChannel as TextChannel).nsfw !== (guildNewChannel as TextChannel).nsfw
+			(guildOldChannel as TextChannel).nsfw !==
+				(guildNewChannel as TextChannel).nsfw
 		) {
 			client.emit(
 				'guildChannelNSFWUpdate',
@@ -44,12 +49,18 @@ new Listener({
 		}
 
 		if (oldChannel.type !== newChannel.type) {
-			client.emit('guildChannelTypeUpdate', newChannel, oldChannel.type, newChannel.type);
+			client.emit(
+				'guildChannelTypeUpdate',
+				newChannel,
+				oldChannel.type,
+				newChannel.type,
+			);
 		}
 
 		if (
 			guildOldChannel.type === 'GUILD_VOICE' &&
-			(guildOldChannel as VoiceChannel).userLimit !== (guildNewChannel as VoiceChannel).userLimit
+			(guildOldChannel as VoiceChannel).userLimit !==
+				(guildNewChannel as VoiceChannel).userLimit
 		) {
 			client.emit(
 				'guildChannelUserLimitUpdate',
@@ -61,7 +72,8 @@ new Listener({
 
 		if (
 			guildOldChannel.type === 'GUILD_VOICE' &&
-			(guildOldChannel as VoiceChannel).bitrate !== (guildNewChannel as VoiceChannel).bitrate
+			(guildOldChannel as VoiceChannel).bitrate !==
+				(guildNewChannel as VoiceChannel).bitrate
 		) {
 			client.emit(
 				'guildChannelBitrateUpdate',

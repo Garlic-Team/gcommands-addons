@@ -13,7 +13,10 @@ export class CooldownManager {
 		return;
 	}
 
-	async hasCooldown(client: GClient, userId: Snowflake): Promise<boolean | string> {
+	async hasCooldown(
+		client: GClient,
+		userId: Snowflake,
+	): Promise<boolean | string> {
 		const has = await this._getCooldown(client, userId);
 		if (has && has > Date.now()) return `${ms(has - Date.now())}`;
 		else return false;
@@ -23,7 +26,10 @@ export class CooldownManager {
 		this._setCooldown(client, userId, cooldown);
 	}
 
-	private async _getCooldown(client: GClient, userId: Snowflake): Promise<number | null | undefined> {
+	private async _getCooldown(
+		client: GClient,
+		userId: Snowflake,
+	): Promise<number | null | undefined> {
 		const db = client.getDatabase() as any;
 
 		if (this.cache.get(userId)) return this.cache.get(userId);
@@ -47,14 +53,22 @@ export class CooldownManager {
 		return result;
 	}
 
-	private async _setCooldown(client: GClient, userId: Snowflake, cooldown: number) {
+	private async _setCooldown(
+		client: GClient,
+		userId: Snowflake,
+		cooldown: number,
+	) {
 		const db = client.getDatabase() as any;
 		const cldwn = cooldown + Date.now();
 
 		this.cache.set(userId, cldwn);
 
 		if (db?.type === 'mongodb') {
-			return await db?.insert('plugin-cooldowns', { userId, cooldown: cldwn, expires: new Date(cldwn) });
+			return await db?.insert('plugin-cooldowns', {
+				userId,
+				cooldown: cldwn,
+				expires: new Date(cldwn),
+			});
 		} else if (db?.type === 'prismaio') {
 			return await db?.insert('plugin-cooldowns', { userId, cooldown: cldwn });
 		} else {

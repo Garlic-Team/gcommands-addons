@@ -22,10 +22,14 @@ export class PremiumManagerClass {
 		this._setPremium(client, userId, blacklist);
 	}
 
-	private async _getPremium(client: GClient, userId: Snowflake): Promise<boolean> {
+	private async _getPremium(
+		client: GClient,
+		userId: Snowflake,
+	): Promise<boolean> {
 		const db = client.getDatabase() as any;
 
-		if (String(this.cache.get(userId)) !== 'undefined') return this.cache.get(userId);
+		if (String(this.cache.get(userId)) !== 'undefined')
+			return this.cache.get(userId);
 		let result = false;
 
 		if (db?.type === 'mongodb') {
@@ -46,7 +50,11 @@ export class PremiumManagerClass {
 		return result;
 	}
 
-	private async _setPremium(client: GClient, userId: Snowflake, blacklisted: boolean) {
+	private async _setPremium(
+		client: GClient,
+		userId: Snowflake,
+		blacklisted: boolean,
+	) {
 		const db = client.getDatabase() as any;
 
 		this.cache.set(userId, blacklisted);

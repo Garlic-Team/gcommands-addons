@@ -31,12 +31,15 @@ export class VoteManager {
 		else if (cache === false) return false;
 		else {
 			for (const key of this.keys) {
-				const res = await fetch(getUrl(key.listType, this.client.user.id, userId), {
-					method: 'GET',
-					headers: {
-						Authorization: key.apiKey,
+				const res = await fetch(
+					getUrl(key.listType, this.client.user.id, userId),
+					{
+						method: 'GET',
+						headers: {
+							Authorization: key.apiKey,
+						},
 					},
-				}).catch((e) => e);
+				).catch(e => e);
 
 				const data = await res?.json?.();
 
@@ -88,7 +91,11 @@ export class VoteManager {
 					},
 				);
 			} else {
-				return await this.cache?.insert?.('plugin-votes', { userId, voted: expire, expires: expire });
+				return await this.cache?.insert?.('plugin-votes', {
+					userId,
+					voted: expire,
+					expires: expire,
+				});
 			}
 		} else if (this.cache?.type === 'prismaio') {
 			const exist = await this.cache?.get?.('plugin-votes', {
@@ -107,7 +114,10 @@ export class VoteManager {
 					},
 				});
 			} else {
-				return await this.cache?.insert?.('plugin-votes', { userId, voted: expire });
+				return await this.cache?.insert?.('plugin-votes', {
+					userId,
+					voted: expire,
+				});
 			}
 		} else {
 			return await this.cache?.insert?.(`plugin-votes-${userId}`, expire);
