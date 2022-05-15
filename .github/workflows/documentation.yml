@@ -112,14 +112,14 @@ jobs:
           SEMVER: ${{ steps.semver.outputs.replaced }}
         run: |
           mkdir -p out/${PACKAGE}
-          mv docs/${PACKAGE}/docs/docs.json out/gcommands_${PACKAGE}/${SEMVER}.json
+          mv packages/${PACKAGE}/docs/docs.json out/gcommands_${PACKAGE}/${SEMVER}.json
       - name: Move docs to correct directory
         if: env.BRANCH_OR_TAG == 'branch'
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
           mkdir -p out/${PACKAGE}
-          mv docs/${PACKAGE}/docs/docs.json out/gcommands_${PACKAGE}/${BRANCH_NAME}.json
+          mv packages/${PACKAGE}/docs/docs.json out/gcommands_${PACKAGE}/${BRANCH_NAME}.json
 
       - name: Commit and push
         run: |
