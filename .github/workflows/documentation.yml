@@ -72,14 +72,12 @@ jobs:
       fail-fast: false
       matrix:
         package:
-          [
-            'plugin-blacklist',
-            'plugin-cooldowns',
-            'plugin-language',
-            'plugin-moreevents',
-            'plugin-premium',
-            'plugin-votes',
-          ]
+          - 'plugin-blacklist'
+          - 'plugin-cooldowns'
+          - 'plugin-language'
+          - 'plugin-moreevents'
+          - 'plugin-premium'
+          - 'plugin-votes'
     runs-on: ubuntu-latest
     env:
       BRANCH_NAME: ${{ needs.build.outputs.BRANCH_NAME }}
