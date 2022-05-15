@@ -1,5 +1,5 @@
-import { Client, Interaction } from 'discord.js';
-import { GClient } from 'gcommands';
+import type { Client, Interaction } from 'discord.js';
+import type { GClient } from 'gcommands';
 
 export class LanguageManager {
 	public static __(

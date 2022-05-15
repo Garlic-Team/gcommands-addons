@@ -1,4 +1,4 @@
-import { ListTypes } from '../index';
+import type { ListTypes } from '../index';
 
 export const getUrl = (type: ListTypes, clientId: string, userId: string) => {
 	switch (type) {

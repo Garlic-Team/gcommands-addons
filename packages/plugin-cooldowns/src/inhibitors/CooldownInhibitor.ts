@@ -1,7 +1,7 @@
 import { CommandContext, ComponentContext, Inhibitor } from 'gcommands';
 import { Cooldowns } from '../utils/CooldownManager';
 import ms from 'ms';
-import { Snowflake } from 'discord.js';
+import type { Snowflake } from 'discord.js';
 
 export interface CooldownInhibitorOptions extends Inhibitor.InhibitorOptions {
 	whitelist?: Array<Snowflake>;

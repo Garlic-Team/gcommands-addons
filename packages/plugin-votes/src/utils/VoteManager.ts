@@ -1,7 +1,7 @@
-import { Snowflake } from 'discord.js';
-import { GClient } from 'gcommands';
+import type { Snowflake } from 'discord.js';
+import type { GClient } from 'gcommands';
 import { fetch } from 'undici';
-import { Keys } from '../index';
+import type { Keys } from '../index';
 import { getUrl } from './getUrl';
 
 export class VoteManager {

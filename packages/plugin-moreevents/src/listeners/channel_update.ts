@@ -1,4 +1,4 @@
-import { GuildChannel, TextChannel, VoiceChannel } from 'discord.js';
+import type { GuildChannel, TextChannel, VoiceChannel } from 'discord.js';
 import { Listener } from 'gcommands';
 
 new Listener({

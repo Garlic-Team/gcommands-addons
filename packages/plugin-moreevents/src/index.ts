@@ -9,15 +9,15 @@ declare module 'discord.js' {
 		selectMenu: [SelectMenuInteraction];
 		clickButton: [ButtonInteraction];
 
-		guildBoostLevelUp: [Guild, number, number];
-		guildBoostLevelDown: [Guild, number, number];
+		guildBoostLevelUp: [Guild, string, string];
+		guildBoostLevelDown: [Guild, string, string];
 		guildRegionUpdate: [Guild, string, string];
 		guildBannerUpdate: [Guild, string, string];
 		guildAfkChannelUpdate: [Guild, Channel, Channel];
 		guildVanityURLUpdate: [Guild, string, string];
 		guildFeaturesUpdate: [Guild, object, object];
 		guildAcronymUpdate: [Guild, string, string];
-		guildOwnerUpdate: [Guild, GuildMember, GuildMember];
+		guildOwnerUpdate: [Guild, string, string];
 		guildMaximumMembersUpdate: [Guild, number, number];
 		guildPartnerUpdate: [Guild, boolean, boolean];
 		guildVerifyUpdate: [Guild, boolean, boolean];
@@ -26,22 +26,26 @@ declare module 'discord.js' {
 		threadNameUpdate: [ThreadChannel, string, string];
 		threadLockStateUpdate: [ThreadChannel, ThreadChannel];
 		threadRateLimitPerUserUpdate: [ThreadChannel, number, number];
-		threadAutoArchiveDurationUpdate: [ThreadChannel, number, number];
+		threadAutoArchiveDurationUpdate: [
+			ThreadChannel,
+			number | string,
+			number | string,
+		];
 
-		voiceChannelJoin: [GuildMember, VoiceChannel];
-		voiceChannelLeave: [GuildMember, VoiceChannel];
-		voiceChannelSwitch: [GuildMember, VoiceChannel, VoiceChannel];
+		voiceChannelJoin: [GuildMember, VoiceBasedChannel];
+		voiceChannelLeave: [GuildMember, VoiceBasedChannel];
+		voiceChannelSwitch: [GuildMember, VoiceBasedChannel, VoiceBasedChannel];
 		voiceChannelMute: [GuildMember, VoiceChannelMuteType];
 		voiceChannelUnmute: [GuildMember, VoiceChannelMuteType];
 		voiceChannelDeaf: [GuildMember, VoiceChannelDeafType];
 		voiceChannelUndeaf: [GuildMember, VoiceChannelDeafType];
-		voiceStreamingStart: [GuildMember, VoiceChannel];
-		voiceStreamingStop: [GuildMember, VoiceChannel];
+		voiceStreamingStart: [GuildMember, VoiceBasedChannel];
+		voiceStreamingStop: [GuildMember, VoiceBasedChannel];
 
 		guildMemberNicknameUpdate: [GuildMember, string, string];
 		guildMemberAcceptShipScreening: [GuildMember];
-		guildMemberBoost: [GuildMember, number, number];
-		guildMemberUnboost: [GuildMember, number, number];
+		guildMemberBoost: [GuildMember, Date, Date];
+		guildMemberUnboost: [GuildMember, Date, Date];
 		guildMemberTimeoutAdded: [GuildMember, Date, Date];
 		guildMemberTimeoutChanged: [GuildMember, Date, Date];
 		guildMemberTimeoutRemoved: [GuildMember, Date, Date];
@@ -53,7 +57,7 @@ declare module 'discord.js' {
 		userBannerUpdate: [User, string, string];
 
 		rolePositionUpdate: [Role, number, number];
-		rolePermissionsUpdate: [Role, number, number];
+		rolePermissionsUpdate: [Role, bigint, bigint];
 	}
 }
 
