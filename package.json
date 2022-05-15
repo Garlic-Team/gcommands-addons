@@ -2,9 +2,9 @@
   "name": "@gcommands/addons",
   "version": "0.0.0",
   "scripts": {
-		"lint": "eslint .",
-		"lint:fix": "eslint . --fix",
-		"format": "prettier --write packages/**/*.ts"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write packages/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "@babel/core": "7.17.10",
     "@babel/preset-env": "7.17.10",
     "@babel/preset-typescript": "7.16.7",
+    "@discordjs/ts-docgen": "^0.4.1",
     "@typescript-eslint/eslint-plugin": "5.23.0",
     "@typescript-eslint/parser": "5.23.0",
     "eslint": "8.15.0",
