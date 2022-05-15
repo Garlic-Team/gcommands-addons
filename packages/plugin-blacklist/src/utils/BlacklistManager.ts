@@ -1,5 +1,5 @@
 import { LimitedCollection, Snowflake } from 'discord.js';
-import { GClient } from 'gcommands';
+import type { GClient } from 'gcommands';
 
 export class BlacklistManagerClass {
 	cache: LimitedCollection<Snowflake, boolean>;
