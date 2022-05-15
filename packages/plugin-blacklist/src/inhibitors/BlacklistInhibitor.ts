@@ -10,6 +10,7 @@ export class BlacklistInhibitor extends Inhibitor.Inhibitor {
 
 		if (hasBlacklist) {
 			return ctx.reply({
+				// eslint-disable-next-line quotes
 				content: this.resolveMessage(ctx) || "You're blacklisted.",
 				ephemeral: true,
 			});
