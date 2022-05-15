@@ -8,9 +8,8 @@ export class PremiumInhibitor extends Inhibitor.Inhibitor {
 		if (!hasPremium) {
 			return ctx.reply({
 				content: this.resolveMessage(ctx) || 'This command is premium only.',
-				ephemeral: true
+				ephemeral: true,
 			});
-		}
-		else return true;
+		} else return true;
 	}
 }

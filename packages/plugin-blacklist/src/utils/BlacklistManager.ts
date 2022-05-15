@@ -23,7 +23,7 @@ export class BlacklistManagerClass {
 	}
 
 	private async _getBlacklist(client: GClient, userId: Snowflake): Promise<boolean> {
-		const db = (client.getDatabase() as any);
+		const db = client.getDatabase() as any;
 
 		if (String(this.cache.get(userId)) !== 'undefined') return this.cache.get(userId);
 		let result = false;
@@ -31,13 +31,15 @@ export class BlacklistManagerClass {
 		if (db?.type === 'mongodb') {
 			result = (await db?.get('plugin-blacklist', { userId }))?.blacklisted;
 		} else if (db?.type === 'prismaio') {
-			result = (await db?.get('plugin-blacklist', {
-				where: {
-					userId: userId
-				}
-			}))?.blacklisted;
+			result = (
+				await db?.get('plugin-blacklist', {
+					where: {
+						userId: userId,
+					},
+				})
+			)?.blacklisted;
 		} else {
-			result = (await db?.get(`plugin-blacklist-${userId}}`));
+			result = await db?.get(`plugin-blacklist-${userId}}`);
 		}
 
 		this.cache.set(userId, result);
@@ -45,7 +47,7 @@ export class BlacklistManagerClass {
 	}
 
 	private async _setBlacklist(client: GClient, userId: Snowflake, blacklisted: boolean) {
-		const db = (client.getDatabase() as any);
+		const db = client.getDatabase() as any;
 
 		this.cache.set(userId, blacklisted);
 

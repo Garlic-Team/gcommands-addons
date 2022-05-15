@@ -34,10 +34,10 @@ export class VoteManager {
 				const res = await fetch(getUrl(key.listType, this.client.user.id, userId), {
 					method: 'GET',
 					headers: {
-						'Authorization': key.apiKey
-					}
-				}).catch(e => e);
-	
+						Authorization: key.apiKey,
+					},
+				}).catch((e) => e);
+
 				const data = await res?.json?.();
 
 				if (data?.voted === true || data?.voted == 1) {
@@ -52,17 +52,19 @@ export class VoteManager {
 		}
 	}
 
-	async getFromCache(userId): Promise<number|boolean> {
+	async getFromCache(userId): Promise<number | boolean> {
 		if (this.cache?.type === 'mongodb') {
 			return (await this.cache?.get?.('plugin-votes', { userId }))?.voted;
 		} else if (this.cache?.type === 'prismaio') {
-			return (await this.cache?.get?.('plugin-votes', {
-				where: {
-					userId: userId
-				}
-			}))?.voted;
+			return (
+				await this.cache?.get?.('plugin-votes', {
+					where: {
+						userId: userId,
+					},
+				})
+			)?.voted;
 		} else {
-			return (await this.cache?.get?.(`plugin-votes-${userId}`));
+			return await this.cache?.get?.(`plugin-votes-${userId}`);
 		}
 	}
 
@@ -76,15 +78,15 @@ export class VoteManager {
 				return await this.cache?.update?.(
 					'plugin-votes',
 					{
-					  userId
+						userId,
 					},
 					{
-					  $set: {
+						$set: {
 							voted: expire,
-							expires: expire
-					  }
-					}
-				  );
+							expires: expire,
+						},
+					},
+				);
 			} else {
 				return await this.cache?.insert?.('plugin-votes', { userId, voted: expire, expires: expire });
 			}
@@ -92,18 +94,18 @@ export class VoteManager {
 			const exist = await this.cache?.get?.('plugin-votes', {
 				where: {
 					userId,
-				}
+				},
 			});
 
 			if (exist) {
 				return await this.cache?.update?.('plugin-votes', {
 					where: {
-					  userId
+						userId,
 					},
 					data: {
-					  voted: expire,
-					}
-				  });
+						voted: expire,
+					},
+				});
 			} else {
 				return await this.cache?.insert?.('plugin-votes', { userId, voted: expire });
 			}

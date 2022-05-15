@@ -1,6 +1,11 @@
 {
   "name": "@gcommands/addons",
   "version": "0.0.0",
+  "scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"format": "prettier --write packages/**/*.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Garlic-Team/gcommands-addons.git"

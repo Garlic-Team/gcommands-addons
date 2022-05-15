@@ -23,7 +23,7 @@ export class PremiumManagerClass {
 	}
 
 	private async _getPremium(client: GClient, userId: Snowflake): Promise<boolean> {
-		const db = (client.getDatabase() as any);
+		const db = client.getDatabase() as any;
 
 		if (String(this.cache.get(userId)) !== 'undefined') return this.cache.get(userId);
 		let result = false;
@@ -31,13 +31,15 @@ export class PremiumManagerClass {
 		if (db?.type === 'mongodb') {
 			result = (await db?.get('plugin-premium', { userId }))?.blacklisted;
 		} else if (db?.type === 'prismaio') {
-			result = (await db?.get('plugin-premium', {
-				where: {
-					userId: userId
-				}
-			}))?.blacklisted;
+			result = (
+				await db?.get('plugin-premium', {
+					where: {
+						userId: userId,
+					},
+				})
+			)?.blacklisted;
 		} else {
-			result = (await db?.get(`plugin-premium-${userId}}`));
+			result = await db?.get(`plugin-premium-${userId}}`);
 		}
 
 		this.cache.set(userId, result);
@@ -45,7 +47,7 @@ export class PremiumManagerClass {
 	}
 
 	private async _setPremium(client: GClient, userId: Snowflake, blacklisted: boolean) {
-		const db = (client.getDatabase() as any);
+		const db = client.getDatabase() as any;
 
 		this.cache.set(userId, blacklisted);
 

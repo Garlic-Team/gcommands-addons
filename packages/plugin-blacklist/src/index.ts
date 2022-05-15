@@ -5,9 +5,7 @@ import { BlacklistManager } from './utils/BlacklistManager';
 const pluginName = '@gcommands/plugin-blacklist';
 
 Command.setDefaults({
-	inhibitors: [
-		new BlacklistInhibitor()
-	]
+	inhibitors: [new BlacklistInhibitor()],
 });
 
 new Plugin(pluginName, (client) => {

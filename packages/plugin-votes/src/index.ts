@@ -4,16 +4,16 @@ import { VoteManager } from './utils/VoteManager';
 
 const pluginName = '@gcommands/plugin-votes';
 
-export type ListTypes = 'TOP.GG' | 'VoidBots'
+export type ListTypes = 'TOP.GG' | 'VoidBots';
 export interface PluginVotesOptions {
 	/**
 	 * @deprecated Use listTypes instead.
 	 */
-    type: ListTypes | ListTypes[];
+	type: ListTypes | ListTypes[];
 	/**
 	 * @deprecated Use apiKeys instead.
 	 */
-    dblToken: string | string[];
+	dblToken: string | string[];
 	/**
 	 * @deprecated Use serverAuthKey instead.
 	 */
@@ -37,7 +37,7 @@ export interface PluginVotesOptions {
 	/**
 	 * The port the webhook server will listen on.
 	 */
-    port?: number;
+	port?: number;
 
 	/**
 	 * The database to use.
@@ -64,21 +64,22 @@ export default (options: PluginVotesOptions) => {
 	}
 
 	new Plugin(pluginName, (client) => {
-		if (!options.database && !client.getDatabase()) return Logger.error('Please add the database parameter to the client/plugin.', pluginName);
+		if (!options.database && !client.getDatabase())
+			return Logger.error('Please add the database parameter to the client/plugin.', pluginName);
 
-		const keys: Keys[] = 
-			Array.isArray(options.listTypes) ?
-				options.listTypes?.map((_, i) => {
+		const keys: Keys[] = Array.isArray(options.listTypes)
+			? options.listTypes?.map((_, i) => {
 					return {
 						listType: options.listTypes[i] as ListTypes,
-						apiKey: options.apiKeys[i]
+						apiKey: options.apiKeys[i],
 					};
-				}) : [
+			  })
+			: ([
 					{
-						listType: options.listTypes  as ListTypes,
-						apiKey: options.apiKeys
-					}
-				] as Keys[];
+						listType: options.listTypes as ListTypes,
+						apiKey: options.apiKeys,
+					},
+			  ] as Keys[]);
 
 		const manager = new VoteManager(client, keys, options.database || client.getDatabase());
 
@@ -89,16 +90,16 @@ export default (options: PluginVotesOptions) => {
 		client.voteManager = manager;
 
 		client._listTypes = options.type;
-    
+
 		expressServer(client.voteManager, options.serverAuthKey, options.port);
 	});
 };
 
 export const expressServer = (voteManager: VoteManager, serverAuthKey: string, port: number) => {
 	const app = express();
-	
+
 	app.use(express.json());
-    
+
 	app.post('/dblwebhook', (req, res) => {
 		if (req.headers.authorization !== serverAuthKey) {
 			res.status(401).send('Unauthorized');
@@ -119,12 +120,12 @@ export * from './utils/VoteManager';
 export * as isVoted from './utils/VoteManager';
 
 declare module 'gcommands' {
-    interface GClient {
+	interface GClient {
 		/**
 		 * @deprecated Use client.voteManager instead.
 		 */
-        isVoted: VoteManager;
+		isVoted: VoteManager;
 		voteManager: VoteManager;
 		_listTypes: ListTypes | ListTypes[];
-    }
+	}
 }

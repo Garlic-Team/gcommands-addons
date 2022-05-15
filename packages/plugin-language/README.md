@@ -28,6 +28,16 @@ yarn add @gcommands/plugin-language
 pnpm add @gcommands/plugin-language
 ```
 
+> # TIP  
+> You can change default gcommands responses  
+> `NOT_FOUND`  
+> `ERROR`  
+> `COOLDOWN` -> {duration} {name}  
+> `ARGUMENT_REQUIRED` -> {user} {name} {type}  
+> `ARGUMENT_TIME` -> {user}  
+> 
+> https://github.com/Garlic-Team/gcommands/blob/next/src/responses.json
+
 ```js
 // index.js
 const { Plugins } = require('gcommands');
@@ -39,8 +49,6 @@ require('@gcommands/plugin-language').default({
 });
 
 Plugins.search(__dirname);
-
-// ERROR, COOLDOWN, NOT_FOUND are default in GCommands (you can change it via plugin-language)
 
 // responses.json
 {

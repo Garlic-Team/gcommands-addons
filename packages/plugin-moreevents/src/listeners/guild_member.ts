@@ -7,57 +7,44 @@ new Listener({
 		const client = oldMember.client;
 
 		if (newMember.premiumSince) {
-			client.emit('guildMemberBoost',
-				newMember,
-				oldMember.premiumSince,
-				newMember.premiumSince,
-			);
+			client.emit('guildMemberBoost', newMember, oldMember.premiumSince, newMember.premiumSince);
 		}
 
 		if (oldMember.premiumSince && !newMember.premiumSince) {
-			client.emit('guildMemberUnboost',
-				newMember,
-				oldMember.premiumSince,
-				newMember.premiumSince,
-			);
+			client.emit('guildMemberUnboost', newMember, oldMember.premiumSince, newMember.premiumSince);
 		}
 
 		if (oldMember.nickname !== newMember.nickname) {
-			client.emit('guildMemberNicknameUpdate',
-				newMember,
-				oldMember.nickname,
-				newMember.nickname,
-			);
+			client.emit('guildMemberNicknameUpdate', newMember, oldMember.nickname, newMember.nickname);
 		}
 
 		if (!oldMember.isCommunicationDisabled() && newMember.isCommunicationDisabled()) {
-			client.emit('guildMemberTimeoutAdded',
+			client.emit(
+				'guildMemberTimeoutAdded',
 				newMember,
 				oldMember.communicationDisabledUntil,
-				newMember.communicationDisabledUntil
+				newMember.communicationDisabledUntil,
 			);
 		}
 
 		if (oldMember.isCommunicationDisabled() && !newMember.isCommunicationDisabled()) {
-			client.emit('guildMemberTimeoutRemoved',
-				newMember,
-				oldMember.communicationDisabledUntil,
-				null
-			);
+			client.emit('guildMemberTimeoutRemoved', newMember, oldMember.communicationDisabledUntil, null);
 		}
 
-		if (oldMember.isCommunicationDisabled() && oldMember.communicationDisabledUntilTimestamp !== newMember.communicationDisabledUntilTimestamp) {
-			client.emit('guildMemberTimeoutChanged',
+		if (
+			oldMember.isCommunicationDisabled() &&
+			oldMember.communicationDisabledUntilTimestamp !== newMember.communicationDisabledUntilTimestamp
+		) {
+			client.emit(
+				'guildMemberTimeoutChanged',
 				newMember,
 				oldMember.communicationDisabledUntil,
-				newMember.communicationDisabledUntil
+				newMember.communicationDisabledUntil,
 			);
 		}
 
 		if (newMember.pending === false) {
-			client.emit('guildMemberAcceptShipScreening',
-				newMember,
-			);
+			client.emit('guildMemberAcceptShipScreening', newMember);
 		}
-	}
+	},
 });

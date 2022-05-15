@@ -8,14 +8,10 @@ new Listener({
 
 		if (interaction.isButton()) {
 			client.emit('clickButton', interaction);
-		}
-
-		else if (interaction.isSelectMenu()) {
+		} else if (interaction.isSelectMenu()) {
 			client.emit('selectMenu', interaction);
-		}
-
-		else if (interaction.isAutocomplete()) {
+		} else if (interaction.isAutocomplete()) {
 			client.emit('autocomplete', interaction);
 		}
-	}
+	},
 });

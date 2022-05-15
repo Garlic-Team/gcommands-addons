@@ -8,9 +8,8 @@ export class BlacklistInhibitor extends Inhibitor.Inhibitor {
 		if (hasBlacklist) {
 			return ctx.reply({
 				content: this.resolveMessage(ctx) || 'You\'re blacklisted.',
-				ephemeral: true
+				ephemeral: true,
 			});
-		}
-		else return true;
+		} else return true;
 	}
 }

@@ -24,7 +24,7 @@ export class CooldownManager {
 	}
 
 	private async _getCooldown(client: GClient, userId: Snowflake): Promise<number | null | undefined> {
-		const db = (client.getDatabase() as any);
+		const db = client.getDatabase() as any;
 
 		if (this.cache.get(userId)) return this.cache.get(userId);
 		let result = 0;
@@ -32,13 +32,15 @@ export class CooldownManager {
 		if (db?.type === 'mongodb') {
 			result = (await db?.get('plugin-cooldowns', { userId }))?.cooldown;
 		} else if (db?.type === 'prismaio') {
-			result = (await db?.get('plugin-cooldowns', {
-				where: {
-					userId: userId
-				}
-			}))?.cooldown;
+			result = (
+				await db?.get('plugin-cooldowns', {
+					where: {
+						userId: userId,
+					},
+				})
+			)?.cooldown;
 		} else {
-			result = (await db?.get(`plugin-cooldowns-${userId}}`));
+			result = await db?.get(`plugin-cooldowns-${userId}}`);
 		}
 
 		this.cache.set(userId, result);
@@ -46,7 +48,7 @@ export class CooldownManager {
 	}
 
 	private async _setCooldown(client: GClient, userId: Snowflake, cooldown: number) {
-		const db = (client.getDatabase() as any);
+		const db = client.getDatabase() as any;
 		const cldwn = cooldown + Date.now();
 
 		this.cache.set(userId, cldwn);
