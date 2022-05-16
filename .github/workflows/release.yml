@@ -56,6 +56,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
 
       - name: Publish releases
-        run: node ./scripts/create-release.mjs ${{ github.event.inputs.name }}
+        run: |
+          npm ci
+          node ./scripts/create-release.mjs ${{ github.event.inputs.name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
