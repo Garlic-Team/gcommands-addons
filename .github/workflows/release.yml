@@ -29,14 +29,16 @@ jobs:
           variable=$(jq --raw-output '.version' package.json)
           echo ::set-output name=version::$variable
 
-      - name: Publish releases
-        uses: ncipollo/release-action@v1
-        with:
-          tag: '@gcommands/${{ github.event.inputs.name }}@${{ steps.get_version.outputs.version }}'
-          name: '@gcommands/${{ github.event.inputs.name }}@${{ steps.get_version.outputs.version }}'
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes
+        run: |
+          cd packages/${{ github.event.inputs.name }}
+          npm run changelog
 
-      - name: Release ${{ github.event.inputs.name }}
+          git add --all .
+          git commit -m "chore(release): ${{ steps.get_version.outputs.version }} 🎉" -m "Build ran for ${GITHUB_SHA}"
+          git push -u origin master
+
+      - name: Publish a NPM package
         run: |
           npm ci
           cd packages/${{ github.event.inputs.name }}
@@ -45,3 +47,8 @@ jobs:
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+
+      - name: Publish releases
+        run: node ./scripts/create-release.mjs ${{ github.event.inputs.name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
