@@ -12,6 +12,7 @@
     <img src="https://img.shields.io/npm/v/@gcommands/plugin-cooldowns?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-cooldowns" />
     <img src="https://img.shields.io/npm/v/@gcommands/plugin-blacklist?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-blacklist" />
     <img src="https://img.shields.io/npm/v/@gcommands/plugin-premium?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-premium" />
+    <img src="https://img.shields.io/npm/v/@gcommands/plugin-language?color=crimson&logo=npm&style=flat-square&label=@gcommands/plugin-language" />
   </p>
   <p>
     <a href="https://ko-fi.com/H2H05FNRL"><img src="https://img.shields.io/badge/Kofi-Donate-yellow?style=for-the-badge" height="30" /></a>
