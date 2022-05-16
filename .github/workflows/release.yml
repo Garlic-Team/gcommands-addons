@@ -31,7 +31,9 @@ jobs:
 
       - name: Push changes
         run: |
+          npm ci
           cd packages/${{ github.event.inputs.name }}
+          npm ci
           npm run changelog
 
           git add --all .
