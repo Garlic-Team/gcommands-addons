@@ -11,7 +11,7 @@ new Listener({
 				'guildBoostLevelUp',
 				newGuild,
 				oldGuild.premiumTier,
-				newGuild.premiumTier,
+				newGuild.premiumTier
 			);
 		}
 
@@ -20,7 +20,7 @@ new Listener({
 				'guildBoostLevelDown',
 				newGuild,
 				oldGuild.premiumTier,
-				newGuild.premiumTier,
+				newGuild.premiumTier
 			);
 		}
 
@@ -29,7 +29,7 @@ new Listener({
 				'guildBannerUpdate',
 				newGuild,
 				oldGuild.banner,
-				newGuild.banner,
+				newGuild.banner
 			);
 		}
 
@@ -38,7 +38,7 @@ new Listener({
 				'guildAfkChannelUpdate',
 				newGuild,
 				oldGuild.afkChannel,
-				newGuild.afkChannel,
+				newGuild.afkChannel
 			);
 		}
 
@@ -47,7 +47,7 @@ new Listener({
 				'guildVanityURLUpdate',
 				newGuild,
 				oldGuild.vanityURLCode,
-				newGuild.vanityURLCode,
+				newGuild.vanityURLCode
 			);
 		}
 
@@ -56,7 +56,7 @@ new Listener({
 				'guildFeaturesUpdate',
 				newGuild,
 				oldGuild.features,
-				newGuild.features,
+				newGuild.features
 			);
 		}
 
@@ -65,7 +65,7 @@ new Listener({
 				'guildAcronymUpdate',
 				newGuild,
 				oldGuild.nameAcronym,
-				newGuild.nameAcronym,
+				newGuild.nameAcronym
 			);
 		}
 
@@ -74,7 +74,7 @@ new Listener({
 				'guildOwnerUpdate',
 				newGuild,
 				oldGuild.ownerId,
-				newGuild.ownerId,
+				newGuild.ownerId
 			);
 		}
 
@@ -83,7 +83,7 @@ new Listener({
 				'guildMaximumMembersUpdate',
 				newGuild,
 				oldGuild.maximumMembers,
-				newGuild.maximumMembers,
+				newGuild.maximumMembers
 			);
 		}
 
@@ -92,7 +92,7 @@ new Listener({
 				'guildPartnerUpdate',
 				newGuild,
 				oldGuild.partnered,
-				newGuild.partnered,
+				newGuild.partnered
 			);
 		}
 
@@ -101,7 +101,67 @@ new Listener({
 				'guildVerifyUpdate',
 				newGuild,
 				oldGuild.verified,
-				newGuild.verified,
+				newGuild.verified
+			);
+		}
+		
+		if (oldGuild.name !== newGuild.name) {
+			client.emit(
+				'guildNameUpdate',
+				newGuild,
+				oldGuild.name,
+				newGuild.name
+			);
+		}
+		
+		if (oldGuild.icon !== newGuild.icon) {
+			client.emit(
+				'guildIconUpdate',
+				newGuild,
+				oldGuild
+			);
+		}
+		
+		if (oldGuild.discoverySplash !== newGuild.discoverySplash) {
+			client.emit(
+				'guildDiscoverySplashUpdate',
+				newGuild,
+				oldGuild
+			);
+		}
+		
+		if (oldGuild.splash !== newGuild.splash) {
+			client.emit(
+				'guildSplashUpdate',
+				newGuild,
+				oldGuild
+			);
+		}
+		
+		if (oldGuild.description !== newGuild.description) {
+			client.emit(
+				'guildDescriptionUpdate',
+				newGuild,
+				oldGuild.description,
+				newGuild.description
+			);
+		}
+		
+		if (oldGuild.defaultMessageNotifications !== newGuild.defaultMessageNotifications) {
+			client.emit(
+				'guildDefaultMessageNotifications',
+				newGuild,
+				oldGuild.defaultMessageNotifications,
+				newGuild.defaultMessageNotifications
+			);
+		}
+		
+		if (oldGuild.explicitContentFilter !== newGuild.explicitContentFilter) {
+			client.emit(
+				'guildExplicitContentFilter',
+				newGuild,
+				oldGuild.explicitContentFilter,
+				newGuild.explicitContentFilter
 			);
 		}
 	},
