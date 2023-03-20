@@ -17,7 +17,7 @@ new Listener({
 				'guildChannelPermissionsUpdate',
 				newChannel,
 				guildOldChannel.permissionOverwrites,
-				guildNewChannel.permissionOverwrites,
+				guildNewChannel.permissionOverwrites
 			);
 		}
 
@@ -26,7 +26,7 @@ new Listener({
 				'guildChannelTopicUpdate',
 				newChannel,
 				(guildOldChannel as TextChannel).topic,
-				(guildNewChannel as TextChannel).topic,
+				(guildNewChannel as TextChannel).topic
 			);
 		}
 
@@ -35,7 +35,7 @@ new Listener({
 				'guildChannelNSFWUpdate',
 				newChannel,
 				(guildOldChannel as TextChannel).nsfw,
-				(guildNewChannel as TextChannel).nsfw,
+				(guildNewChannel as TextChannel).nsfw
 			);
 		}
 
@@ -44,7 +44,7 @@ new Listener({
 				'guildChannelTypeUpdate',
 				newChannel,
 				oldChannel.type,
-				newChannel.type,
+				newChannel.type
 			);
 		}
 
@@ -53,7 +53,7 @@ new Listener({
 				'guildChannelUserLimitUpdate',
 				newChannel,
 				(guildOldChannel as VoiceChannel).userLimit,
-				(guildNewChannel as VoiceChannel).userLimit,
+				(guildNewChannel as VoiceChannel).userLimit
 			);
 		}
 
@@ -62,7 +62,7 @@ new Listener({
 				'guildChannelBitrateUpdate',
 				newChannel,
 				(guildOldChannel as VoiceChannel).bitrate,
-				(guildNewChannel as VoiceChannel).bitrate,
+				(guildNewChannel as VoiceChannel).bitrate
 			);
 		}
 		
@@ -110,5 +110,5 @@ new Listener({
 				guildNewChannel.rawPosition
 			);
 		}
-	},
+	}
 });
