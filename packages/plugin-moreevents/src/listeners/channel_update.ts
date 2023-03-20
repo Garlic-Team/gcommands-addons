@@ -10,10 +10,9 @@ new Listener({
 		const guildOldChannel = oldChannel as GuildChannel;
 		const guildNewChannel = newChannel as GuildChannel;
 
-		if (
-			guildOldChannel.permissionOverwrites !==
-			guildOldChannel.permissionOverwrites
-		) {
+		
+		
+		if (!guildOldChannel.permissionOverwrites.cache.equals(guildOldChannel.permissionOverwrites)) {
 			client.emit(
 				'guildChannelPermissionsUpdate',
 				newChannel,
@@ -22,11 +21,7 @@ new Listener({
 			);
 		}
 
-		if (
-			guildOldChannel.type === 'GUILD_TEXT' &&
-			(guildOldChannel as TextChannel).topic !==
-				(guildNewChannel as TextChannel).topic
-		) {
+		if (guildOldChannel.type === 0 && (guildOldChannel as TextChannel).topic !== (guildNewChannel as TextChannel).topic) {
 			client.emit(
 				'guildChannelTopicUpdate',
 				newChannel,
@@ -35,11 +30,7 @@ new Listener({
 			);
 		}
 
-		if (
-			guildOldChannel.type === 'GUILD_TEXT' &&
-			(guildOldChannel as TextChannel).nsfw !==
-				(guildNewChannel as TextChannel).nsfw
-		) {
+		if (guildOldChannel.type === 0 && (guildOldChannel as TextChannel).nsfw !== (guildNewChannel as TextChannel).nsfw) {
 			client.emit(
 				'guildChannelNSFWUpdate',
 				newChannel,
@@ -57,11 +48,7 @@ new Listener({
 			);
 		}
 
-		if (
-			guildOldChannel.type === 'GUILD_VOICE' &&
-			(guildOldChannel as VoiceChannel).userLimit !==
-				(guildNewChannel as VoiceChannel).userLimit
-		) {
+		if (guildOldChannel.type === 2 && (guildOldChannel as VoiceChannel).userLimit !== (guildNewChannel as VoiceChannel).userLimit) {
 			client.emit(
 				'guildChannelUserLimitUpdate',
 				newChannel,
@@ -70,16 +57,57 @@ new Listener({
 			);
 		}
 
-		if (
-			guildOldChannel.type === 'GUILD_VOICE' &&
-			(guildOldChannel as VoiceChannel).bitrate !==
-				(guildNewChannel as VoiceChannel).bitrate
-		) {
+		if (guildOldChannel.type === 2 && (guildOldChannel as VoiceChannel).bitrate !== (guildNewChannel as VoiceChannel).bitrate) {
 			client.emit(
 				'guildChannelBitrateUpdate',
 				newChannel,
 				(guildOldChannel as VoiceChannel).bitrate,
 				(guildNewChannel as VoiceChannel).bitrate,
+			);
+		}
+		
+		if (guildOldChannel.name !== guildNewChannel.name) {
+			client.emit(
+				'guildChannelNameUpdate',
+				newChannel,
+				guildOldChannel.name,
+				guildNewChannel.name
+			);
+		}
+		
+		if (guildOldChannel.parentId !== guildNewChannel.parentId) {
+			client.emit(
+				'guildChannelCategoryUpdate',
+				newChannel,
+				guildOldChannel.parent,
+				guildNewChannel.parent
+			);
+		}
+		
+		if (guildOldChannel.permissionsLocked !== guildNewChannel.permissionLocked) {
+			client.emit(
+				'guildChannelSynchronizationUpdate',
+				newChannel,
+				guildOldChannel.permissionsLocked,
+				guildNewChannel.permissionsLocked
+			);
+		}
+		
+		if (guildOldChannel.position !== guildNewChannel.position) {
+			client.emit(
+				'guildChannelPositionUpdate',
+				newChannel,
+				guildOldChannel.position,
+				guildNewChannel.position
+			);
+		}
+		
+		if (guildOldChannel.rawPosition !== guildNewChannel.rawPosition) {
+			client.emit(
+				'guildChannelRawPositionUpdate',
+				newChannel,
+				guildOldChannel.rawPosition,
+				guildNewChannel.rawPosition
 			);
 		}
 	},
