@@ -15,11 +15,7 @@ new Listener({
 			client.emit('voiceChannelLeave', member, oldState.channel);
 		}
 
-		if (
-			oldState.channel &&
-			newState.channel &&
-			oldState.channel.id !== newState.channel.id
-		) {
+		if (oldState.channel && newState.channel && oldState.channel.id !== newState.channel.id) {
 			client.emit(
 				'voiceChannelSwitch',
 				member,
@@ -54,6 +50,14 @@ new Listener({
 
 		if (oldState.streaming && !newState.streaming) {
 			client.emit('voiceStreamingStop', member, newState.channel);
+		}
+		
+		if (oldState.selfVideo && !newState.selfVideo) {
+			client.emit('voiceCameraDisabled', member, newState.channel);
+		}
+		
+		if (!oldState.selfVideo && newState.selfVideo) {
+			client.emit('voiceCameraEnabled', member, newState.channel);
 		}
 	},
 });
