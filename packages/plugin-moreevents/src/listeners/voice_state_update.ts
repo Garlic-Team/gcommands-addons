@@ -36,12 +36,12 @@ new Listener({
 
 		if (!oldState.deaf && newState.deaf) {
 			const deafType = newState.selfDeaf ? 'self-deafened' : 'server-deafened';
-			client.emit('voiceChannelDeafen', member, deafType);
+			client.emit('voiceChannelDeaf', member, deafType);
 		}
 
 		if (oldState.deaf && !newState.deaf) {
 			const deafType = oldState.selfDeaf ? 'self-deafened' : 'server-deafened';
-			client.emit('voiceChannelUndeafen', member, deafType);
+			client.emit('voiceChannelUndeaf', member, deafType);
 		}
 
 		if (!oldState.streaming && newState.streaming) {
