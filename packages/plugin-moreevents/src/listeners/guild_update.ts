@@ -210,14 +210,6 @@ new Listener({
 			);
 		}
 		
-		if (oldGuild.banner !== newGuild.banner) {
-			client.emit(
-				'guildBannerUpdate',
-				newGuild,
-				oldGuild
-			);
-		}
-		
 		if (oldGuild.maximumMembers > newGuild.maximumMembers) {
 			client.emit(
 				'guildMaximumMembersIncreased',
