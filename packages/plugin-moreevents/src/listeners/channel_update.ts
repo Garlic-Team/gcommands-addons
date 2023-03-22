@@ -12,7 +12,7 @@ new Listener({
 
 		
 		
-		if (!guildOldChannel.permissionOverwrites.cache.equals(guildOldChannel.permissionOverwrites)) {
+		if (!guildOldChannel.permissionOverwrites.cache.equals(guildOldChannel.permissionOverwrites.cache)) {
 			client.emit(
 				'guildChannelPermissionsUpdate',
 				newChannel,
