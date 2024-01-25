@@ -90,7 +90,7 @@ jobs:
       - name: 'Extract package from tag'
         if: env.BRANCH_OR_TAG == 'tag'
         id: package-name
-        uses: frabert/replace-string-action@v2.0
+        uses: frabert/replace-string-action@v2.5
         with:
           pattern: '(^@.*\\/(?<package>.*)@v?)?(?<semver>\\d+.\\d+.\\d+)-?.*'
           string: ${{ env.BRANCH_NAME }}
@@ -99,7 +99,7 @@ jobs:
       - name: 'Extract semver from tag'
         if: env.BRANCH_OR_TAG == 'tag'
         id: semver
-        uses: frabert/replace-string-action@v2.0
+        uses: frabert/replace-string-action@v2.5
         with:
           pattern: '(^@.*\\/(?<package>.*)@v?)?(?<semver>\\d+.\\d+.\\d+)-?.*'
           string: ${{ env.BRANCH_NAME }}
